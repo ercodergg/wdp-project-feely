@@ -31,7 +31,7 @@ export function renderHome(container) {
   // Transición suave al cargar la quote
   const quoteEl = container.querySelector('#quote-text')
   quoteEl.style.opacity = '0'
-  quoteEl.style.transform = 'translateY(10px)'
+  quoteEl.style.transform = 'translateX(10px)'
   setTimeout(() => {
     quoteEl.style.transition = 'opacity 1s ease, transform 1s ease'
     quoteEl.style.opacity = '1'

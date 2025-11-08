@@ -13,14 +13,19 @@ const footer = document.querySelector('#footer')
 document.addEventListener('DOMContentLoaded', () => {
   footer.innerHTML = renderFooter()
   navigate('home')
-  let isDayMode = true;
-  setTheme(isDayMode)
+  const isDayMode = isDayTime()
+  setTheme(isDayMode)  
 
 })
 function setTheme(isDay) {
   const body = document.body
   body.classList.remove('day', 'night')
   body.classList.add(isDay ? 'day' : 'night')
+}
+function isDayTime() {
+  const now = new Date()
+  const hour = now.getHours()
+  return hour >= 7 && hour < 19 // Día entre 7:00 y 18:59
 }
 
 // Simple router
