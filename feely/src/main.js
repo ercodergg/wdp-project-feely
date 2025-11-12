@@ -25,7 +25,7 @@ function setTheme(isDay) {
 function isDayTime() {
   const now = new Date()
   const hour = now.getHours()
-  return hour >= 7 && hour < 19 // Día entre 7:00 y 18:59
+  return hour >= 7 && hour < 17; // Día entre 7:00 y 18:59
 }
 
 // Simple router

@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Special Gothic Expanded One", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -108,7 +108,7 @@ body{
 body.day {
   background-image: linear-gradient(to bottom,
       var(--light-background) 0%,
-      var(--center-background) 18%,
+      var(--center-background) 22%,
       var(--center-background) 90%,
       var(--light-background) 100%);
 }
@@ -116,7 +116,7 @@ body.day {
 body.night {
   background-image: linear-gradient(to bottom,
       var(--dark-background) 0%,
-      var(--center-background) 18%,
+      var(--center-background) 22%,
       var(--center-background) 90%,
       var(--dark-background) 100%);
 }

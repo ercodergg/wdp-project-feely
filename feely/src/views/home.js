@@ -14,7 +14,7 @@ export function renderHome(container) {
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
 
   container.innerHTML = `
-    <h1>Welcome to Feely!!</h1>
+    <h1 id="welcome">Welcome to Feely!!</h1>
     <div class="quote-container">
       <h3 id="quote-text">“${randomQuote}”</h3>
     </div>
@@ -30,11 +30,17 @@ export function renderHome(container) {
 
   // Transición suave al cargar la quote
   const quoteEl = container.querySelector('#quote-text')
+  const h1_move = container.querySelector('#welcome');
+  h1_move.style.transform = 'translateY(60px)'
+  h1_move.style.opacity = '0'
   quoteEl.style.opacity = '0'
   quoteEl.style.transform = 'translateX(10px)'
   setTimeout(() => {
     quoteEl.style.transition = 'opacity 1s ease, transform 1s ease'
     quoteEl.style.opacity = '1'
+    h1_move.style.opacity = '1'
+    h1_move.style.transition = 'opacity 1.8s ease,transform 1s ease'
     quoteEl.style.transform = 'translateY(0)'
+    h1_move.style.transform = 'translateY(0)'
   }, 100)
 }

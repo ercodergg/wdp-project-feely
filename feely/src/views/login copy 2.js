@@ -1,14 +1,3 @@
-import levelIcon from '../pngicons/level.png'
-import planIcon from '../pngicons/plan.png'
-
-const quotes = [
-  "Breathe, feel, be honest with yourself.",
-  "Your emotions are valid, even when messy.",
-  "Pause. Listen. Let it move through you.",
-  "You are allowed to feel everything.",
-  "Naming your feeling is the first step to healing.",
-  "Softness is strength. Vulnerability is clarity."
-]
 
 
   export function renderLogin(container) {

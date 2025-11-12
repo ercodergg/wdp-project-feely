@@ -1,6 +1,7 @@
-# wdp-project-feely
-## First workshop - WDP
+# First workshop - WDP
+
 ### Ernesto Garcés Giner - Web Development & Projects
+
 Tasks:
 
 - defining your user goals and summarizing your project in one sentence
@@ -15,7 +16,7 @@ In today’s fast-paced and demanding world, many people experience anxiety and 
 
 This web app aims to support users—especially those with busy schedules—by helping them recognize and reflect on their emotions throughout the day or week. By fostering emotional awareness and encouraging healthier habits, the app empowers users to make meaningful changes that enhance their mental and emotional well-being.
 
-![image.png](attachment:9cbd3c89-0614-430a-a782-57126b5fefba:image.png)
+![image.png](First%20workshop%20-%20WDP/image.png)
 
 The sentence that summarizes the project is:
 
@@ -25,7 +26,7 @@ The sentence that summarizes the project is:
 
 ## **📖👥**User stories
 
-![photo-1500648767791-00dcc994a43e.jpeg](attachment:f631f8d7-75e9-4704-ab88-3a8e046a81ef:photo-1500648767791-00dcc994a43e.jpeg)
+![photo-1500648767791-00dcc994a43e.jpeg](First%20workshop%20-%20WDP/photo-1500648767791-00dcc994a43e.jpeg)
 
 ### **Scott Sigmund** - Marketing Professional
 
@@ -39,7 +40,7 @@ As a marketing manager juggling multiple campaigns, I want a space to reflect on
 
 ---
 
-![image.png](attachment:1d53f38b-d7ae-4ae9-9786-f83326bf5df1:image.png)
+![image.png](First%20workshop%20-%20WDP/image%201.png)
 
 ### **Ivor Byrne** - Auto Mechanic
 
@@ -53,7 +54,7 @@ As a mechanic working long shifts in a noisy, fast-paced environment, I want a s
 
 ---
 
-![image.png](attachment:a5157f3f-9e0a-410c-99f2-7a8881233543:image.png)
+![image.png](First%20workshop%20-%20WDP/image%202.png)
 
 ### **Mahalia Willoughby** - Yoga Instructor
 
