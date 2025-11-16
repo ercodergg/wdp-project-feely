@@ -35,21 +35,17 @@ function submitLogin(event) {
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
 
-  const userData = { username, password };
-
-  // Buscar en el JSON si existe un usuario con esos datos
-  const foundUser = dbusers.find(
-    u => u.username === userData.username && u.password === userData.password
-  );
-
-  if (foundUser) {
-    // Guardar en localStorage
-    localStorage.setItem('user', JSON.stringify(foundUser));
-    console.log('Login correcto:', foundUser);
-    navigate('home');
-  } else {
-    console.log('Usuario o contraseña incorrectos');
-    alert('Usuario o contraseña incorrectos');
-  }
+  fetch('http://localhost:3000/user')
+    .then(res => res.json())
+    .then(users => {
+      const foundUser = users.find(u => u.username === username && u.password === password);
+      if (foundUser) {
+        localStorage.setItem('user', JSON.stringify(foundUser));
+        console.log('Login correcto:', foundUser);
+        navigate('home');
+      } else {
+        alert('Usuario o contraseña incorrectos');
+      }
+    })
+    .catch(err => console.error('Error al validar login:', err));
 }
-
