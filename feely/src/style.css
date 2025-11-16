@@ -1,5 +1,5 @@
 :root {
-  font-family: "Special Gothic Expanded One", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Dela Gothic One", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -8,63 +8,134 @@
   --light-background: #db9dff;
   --center-background: #601e9e;
   --dark-background: rgb(15, 0, 32);
+  --mid-dark-background:#4C177F;
+  --white: #FEFEFE;
+  --black: #000000;
+  --border-radius: 80px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .quote-container {
-  margin: 1rem 0;
+  margin: 0;
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 2rem;
-  border-radius: 2rem;
+  padding-block: 15px ;
+  padding-inline: 50px;
+  border-radius: var(--border-radius);
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
   text-align: center;
   max-width: 600px;
 }
-.quote-container h3{
-  display: inline;
-}
+
+
 #quote-text {
-  font-size: 1.2rem;
+  font-size: 16px;
+  padding:0;
   font-weight: 500;
   color: var(--light-background);
   font-style: italic;
   transition: opacity 1s ease, transform 1s ease;
 }
+h3{
+  padding:0;
+  margin:0;
+}
+body{
+  width: 100%;
+}
+#app{
+  margin:0;
+  padding:0;
+}
 
-footer {
-  display: absolute;
+#footer {
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.3); /* semitransparente para que respire */
-  backdrop-filter: blur(6px);
-  padding: 0.5rem 1rem;
-  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  box-sizing: border-box;
 }
 
 
+.buttons-home {
+  display: flex;
+  justify-content: center;
+  width: 180px;
+  gap:20px;
+  flex-wrap: wrap ;
+}
+
+
+.buttons-home img{
+  width: 80px;  
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  width: 250px;
+  height: 200px;
+  background-color: var(--center-background);
+  gap: 20px;
+  border-radius: var(--border-radius);
+}
+
+form input {
+  height: 40px;
+  width: 90%;
+  background-color: var(--light-background);
+  border: none;
+  color: var(--dark-background);
+  font-family: "Dela Gothic One", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding-left: 10px;
+  border-radius: var(--border-radius);
+}
+
+form input::placeholder {
+  color: var(--dark-background);
+  /* O el color sólido que prefieras */
+  opacity: 1;
+  /* Esto elimina la transparencia */
+}
+
+form button {
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius);
+}
+
 .nav-buttons {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  gap: 1rem;
+  gap: 20px;
+  width: 100%;
+  padding:0px;
 }
 
 .nav-buttons button {
   flex: 1;
-  padding: 0.8rem 1rem;
+  padding-inline: 10px;
+  padding-block: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1rem;
+  font-size: 20px;
   background-color: var(--center-background);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   transition: background-color 0.3s ease;
 }
 
@@ -74,30 +145,26 @@ footer {
 }
 
 .nav-buttons img {
-  width: 4rem;
+  width: 50px;
 }
 
 
 a {
-  font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
 
-.icon-home {
-  width: 5rem;
-  color: white; /* si el SVG usa fill="currentColor" */
-}
 
 a:hover {
   color: #535bf2;
 }
 
-body{
+body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* distribuye desde arriba hasta abajo */
+  justify-content: space-between;
+  /* distribuye desde arriba hasta abajo */
   align-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -107,29 +174,30 @@ body{
 
 body.day {
   background-image: linear-gradient(to bottom,
-      var(--light-background) 0%,
+      var(--light-background) 5%,
       var(--center-background) 22%,
-      var(--center-background) 90%,
+      var(--mid-dark-background) 90%,
       var(--light-background) 100%);
 }
 
 body.night {
   background-image: linear-gradient(to bottom,
-      var(--dark-background) 0%,
+      var(--dark-background) 5%,
       var(--center-background) 22%,
-      var(--center-background) 90%,
-      var(--dark-background) 100%);
+      var(--mid-dark-background) 90%,
+      var(--black) 100%);
 }
 
-footer{
+footer {
   display: absolute;
   bottom: 0;
+  padding: 10px;
 }
 
 h1 {
-  font-size: 4em;
-  color:var(--center-background);
-  line-height: 1.1;
+  font-size: 70px;
+  color: var(--center-background);
+  line-height: 0.8;
   margin-top: 0;
 }
 
@@ -141,7 +209,8 @@ h1 {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* ← esto es lo que necesitas */
+  justify-content: flex-start;
+  /* ← esto es lo que necesitas */
   align-items: center;
   text-align: center;
 }
@@ -171,7 +240,7 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -191,17 +260,23 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* 🌐 Estilos para pantallas mayores a 768px */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 30px;
+    color: var(--center-background);
+    line-height: 1.1;
+    margin-top: 0;
   }
-
-  a:hover {
-    color: #747bff;
+  #quote-text {
+    font-size: 16px;
   }
-
-  button {
-    background-color: #f9f9f9;
+  .nav-buttons button{
+    font-size: 12px;
+  }
+  footer {
+    display: absolute;
+    bottom: 0;
+    padding: 10px;
   }
 }

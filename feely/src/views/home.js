@@ -1,5 +1,5 @@
-import levelIcon from '../pngicons/level.png'
-import planIcon from '../pngicons/plan.png'
+import levelIcon from '../pngicons/level.png';
+import planIcon from '../pngicons/plan.png';
 
 const quotes = [
   "Breathe, feel, be honest with yourself.",
@@ -8,7 +8,7 @@ const quotes = [
   "You are allowed to feel everything.",
   "Naming your feeling is the first step to healing.",
   "Softness is strength. Vulnerability is clarity."
-]
+];
 
 export function renderHome(container) {
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
@@ -20,10 +20,16 @@ export function renderHome(container) {
     </div>
     <section class="buttons-home">
       <a data-view="level-now">
-        <img class="icon-home" id="level" src="${levelIcon}" />
+        <img id="level" src="${levelIcon}"/>
+      </a>
+      <a data-view="level-now">
+        <img id="level" src="${levelIcon}"/>
+      </a>
+      <a data-view="level-now">
+        <img id="level" src="${levelIcon}"/>
       </a>
       <a data-view="week-plan">
-        <img class="icon-home" id="plan" src="${planIcon}" />
+        <img id="plan" src="${planIcon}"/>
       </a>
     </section>
   `
