@@ -3,27 +3,33 @@ import { renderHome } from './views/home.js';
 import { renderLogin } from './views/login.js';
 import { renderRegister } from './views/register.js';
 import { renderProfile } from './views/profile.js';
+import { renderCheck } from './views/check.js';
+import { renderSemanalBalance } from './views/semanal_balance.js';
 import { renderFooter } from './views/footer.js';
-
 const app = document.querySelector('#app');
 const footer = document.querySelector('#footer');
 
 // variable global accesible en navigate
-let user = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   footer.innerHTML = renderFooter();
   const isDayMode = isDayTime();
   setTheme(isDayMode);
 
+  const noregistered_buttons = footer.querySelectorAll('.noregistered-buttons');
+  const registered_buttons = footer.querySelectorAll('.registered-buttons');
+
   const storedUser = localStorage.getItem('user');
-  if (storedUser) {
-    user = JSON.parse(storedUser);
-  }
+  let user = JSON.parse(storedUser);
 
   if (user && user.username) {
+    console.log(user.username);
+    noregistered_buttons.forEach(btn => btn.style.display = "none");
+    registered_buttons.forEach(btn => btn.style.display = "flex");
     navigate('home');
   } else {
+    registered_buttons.forEach(btn => btn.style.display = "none");
+    noregistered_buttons.forEach(btn => btn.style.display = "flex");
     navigate('login');
   }
 });
@@ -55,6 +61,12 @@ export function navigate(view) {
       break;
     case 'profile':
       renderProfile(app, user);   // ahora sí existe
+      break;
+    case 'check':
+      renderCheck(app);
+      break;
+    case 'semanal_balance':
+      renderSemanalBalance(app);
       break;
     default:
       renderHome(app);
