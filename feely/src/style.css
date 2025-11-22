@@ -8,9 +8,10 @@
   --light-background: #db9dff;
   --center-background: #601e9e;
   --dark-background: rgb(15, 0, 32);
-  --mid-dark-background:#4C177F;
+  --mid-dark-background: #4C177F;
   --white: #FEFEFE;
   --black: #000000;
+  --light-gold: #F0E68C;
   --border-radius: 80px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,40 +19,148 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.quote-container {
+.quote-container, .question-container {
+  position: relative;
   margin: 0;
   display: flex;
   flex-direction: row;
-  padding-block: 15px ;
+  padding-block: 15px;
   padding-inline: 50px;
   border-radius: var(--border-radius);
-  /* background-color: rgba(255, 255, 255, 0.1); */
-  background-image: url("./gifs/quote-container.gif");
-  backdrop-filter: blur(4px);
   text-align: center;
-  max-width: 600px;
+  max-width: 800px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.reflexion-container {
+  position: relative;         /* Necesario para que el background absoluto se ancle aquí */
+  display: flex;
+  width: 100%;
+  min-height: 300px;          /* Asegura altura para que el fondo tenga área */
+  flex-direction: column;
+  padding-block: 15px;
+  padding-inline: 50px;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;           /* Recorta el blur dentro del contenedor */
+}
+
+.background {
+  position: absolute;
+  inset: 0;                   /* top/right/bottom/left: 0 */
+  background-image: url('./src/backgrounds/reflexion-background.jpg');
+  background-size: cover;     /* Ocupa todo sin deformar */
+  background-position: center;
+  filter: blur(5px);
+  transform: scale(1.05);     /* Evita bordes por el blur */
+  z-index: 0;                 /* Fondo */
+}
+
+.reflexion-container > *:not(.background) {
+  position: relative;
+  z-index: 1;                 /* Contenido por encima */
+}
+
+.reflexion-container p {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--white);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 
 
-#quote-text {
+.quote-container::before, .question-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 0;
+} 
+.quote-container::before {
+  background: url("./gifs/quote-container.jpeg") no-repeat center/cover;
+}
+.question-container::before {
+  background: url("./gifs/question-container.jpeg") no-repeat center/cover;
+}
+.quote-container::after, .question-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 0;
+}
+.quote-container::after{
+  background: url("./gifs/quote-container.gif") no-repeat center/cover;
+}
+.question-container::after{
+  background: url("./gifs/question-container.gif") no-repeat center/cover;
+}
+
+.quote-container:hover::before, .question-container:hover::before {
+  opacity: 0;
+}
+
+.quote-container:hover::after, .question-container:hover::after {
+  opacity: 1;
+}
+
+.quote-container>*, .question-container>* {
+  position: relative;
+  z-index: 1;
+}
+.button-home {
+  display: flex;
+  flex-direction: row;
+  max-height: 100px;
+
+  align-items: center;
+  text-align: center;
+  color: var(--white);
+  border:2px solid var(--white);
+  background-color: var(--mid-dark-background);
+}
+.icon-home {
+  max-width: 40px;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+}
+.button-home:hover {
+  box-shadow: 0 0 10px var(--white);
+}
+#question-text, #quote-text {
   font-size: 30px;
-  padding:0;
+  padding: 0;
   font-weight: 500;
   /* mix-blend-mode: difference; */
   color: var(--white);
   font-style: italic;
   transition: opacity 1s ease, transform 1s ease;
+    color: #ffffff; /* o el color que uses */
+    text-shadow:
+      0px 0px 10px rgba(0, 0, 0, 1); /* halo suave */
 }
-h3{
-  padding:0;
-  margin:0;
+#question-text {
+  margin-right: 50px;
 }
-body{
-  width: 100%;
+h3 {
+  padding: 0;
+  margin: 0;
 }
-#app{
-  margin:0;
-  padding:0;
+
+
+
+#app {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap:2em;  
 }
 
 #footer {
@@ -73,14 +182,15 @@ body{
   display: flex;
   justify-content: center;
   width: 180px;
-  gap:20px;
-  flex-wrap: wrap ;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 
-.buttons-home img{
-  width: 80px;  
+.buttons-home img {
+  width: 80px;
 }
+
 form {
   display: flex;
   flex-direction: column;
@@ -112,22 +222,88 @@ form input::placeholder {
   /* Esto elimina la transparencia */
 }
 
+form input:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--white);
+  background-color: var(--light-gold);
+}
+
 form button {
   background-color: var(--white);
   color: var(--black);
   border-radius: var(--border-radius);
 }
 
+form button:hover {
+  background-color: var(--light-gold);
+  box-shadow: 0 0 5px var(--white);
+
+}
+
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Show overlay when active */
+.error-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.error-popup {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  z-index: 2000;                    
+  opacity: 0;
+  pointer-events: none;
+}
+
+.error-popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.error {
+  margin: 0;
+  color: red;
+  font-size: 0.95rem;
+}
+
+#error-popup-title {
+  font-weight: 600;
+  margin: 0;
+}
+
 .nav-buttons {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   width: 100%;
-  padding:0px;
+  padding: 0px;
 }
 
 .nav-buttons button {
   flex: 1;
+  max-width: 400px;
   padding-inline: 10px;
   padding-block: 15px;
   display: flex;
@@ -142,8 +318,11 @@ form button {
 }
 
 .nav-buttons button:hover {
-  background-color: transparent;
-  color: black;
+  background-color: var(--mid-dark-background);
+}
+
+.nav-buttons button:active {
+  background-color: var(--dark-background);
 }
 
 .nav-buttons img {
@@ -162,6 +341,7 @@ a:hover {
 }
 
 body {
+  width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -170,8 +350,8 @@ body {
   align-items: center;
   min-width: 320px;
   min-height: 100vh;
-  overflow: hidden;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 body.day {
@@ -212,7 +392,6 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* ← esto es lo que necesitas */
   align-items: center;
   text-align: center;
 }
@@ -262,6 +441,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
 /* 🌐 Estilos para pantallas mayores a 768px */
 @media (max-width: 768px) {
   h1 {
@@ -270,12 +450,28 @@ button:focus-visible {
     line-height: 1.1;
     margin-top: 0;
   }
+
   #quote-text {
     font-size: 16px;
+    color: #ffffff; /* o el color que uses */
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5), /* sombra principal */
+      0px 0px 2px rgba(0, 0, 0, 0.3); /* halo suave */
   }
-  .nav-buttons button{
+  
+  .question-container {
+    margin:0;
+    flex-direction: column;
+    
+  }
+  #question-text {
+    margin: 0;
+    font-size: 18px;
+  }
+  .nav-buttons button {
     font-size: 12px;
   }
+
   footer {
     display: absolute;
     bottom: 0;

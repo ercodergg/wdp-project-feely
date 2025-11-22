@@ -16,20 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const isDayMode = isDayTime();
   setTheme(isDayMode);
 
-  const noregistered_buttons = footer.querySelectorAll('.noregistered-buttons');
-  const registered_buttons = footer.querySelectorAll('.registered-buttons');
+  const noregistered_buttons = footer;
 
   const storedUser = localStorage.getItem('user');
   let user = JSON.parse(storedUser);
 
   if (user && user.username) {
     console.log(user.username);
-    noregistered_buttons.forEach(btn => btn.style.display = "none");
-    registered_buttons.forEach(btn => btn.style.display = "flex");
+    noregistered_buttons.style.display = "none";
     navigate('home');
   } else {
-    registered_buttons.forEach(btn => btn.style.display = "none");
-    noregistered_buttons.forEach(btn => btn.style.display = "flex");
+    noregistered_buttons.style.display = "flex";
     navigate('login');
   }
 });
@@ -76,5 +73,6 @@ export function navigate(view) {
 document.body.addEventListener('click', (e) => {
   if (e.target.dataset.view) {
     navigate(e.target.dataset.view);
+    renderFooter();
   }
 });
