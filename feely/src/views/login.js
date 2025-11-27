@@ -6,6 +6,7 @@ export function renderLogin(container) {
     <form id="LoginForm">
       <input id="login-username" type="text" placeholder="Username" />
       <input id="login-password" type="password" placeholder="Password" />
+      <a data-view="register">Register here</a>
       <section class="buttons">
         <button type="submit">Enter</button>
         <button type="reset">Clear</button>

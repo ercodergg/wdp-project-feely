@@ -5,30 +5,24 @@ import { renderRegister } from './views/register.js';
 import { renderProfile } from './views/profile.js';
 import { renderCheck } from './views/check.js';
 import { renderSemanalBalance } from './views/semanal_balance.js';
-import { renderFooter } from './views/footer.js';
 const app = document.querySelector('#app');
-const footer = document.querySelector('#footer');
 
 // variable global accesible en navigate
 
 document.addEventListener('DOMContentLoaded', () => {
-  footer.innerHTML = renderFooter();
   const isDayMode = isDayTime();
   setTheme(isDayMode);
 
-  const noregistered_buttons = footer;
 
   const storedUser = localStorage.getItem('user');
   let user = JSON.parse(storedUser);
 
-  if (user && user.username) {
-    console.log(user.username);
-    noregistered_buttons.style.display = "none";
+  if (user) {
     navigate('home');
-  } else {
-    noregistered_buttons.style.display = "flex";
-    navigate('login');
   }
+  else {
+    navigate('login');
+  } 
 });
 
 function setTheme(isDay) {
@@ -73,6 +67,5 @@ export function navigate(view) {
 document.body.addEventListener('click', (e) => {
   if (e.target.dataset.view) {
     navigate(e.target.dataset.view);
-    renderFooter();
   }
 });

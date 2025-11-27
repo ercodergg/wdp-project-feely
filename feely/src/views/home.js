@@ -1,5 +1,6 @@
 import levelIcon from '../pngicons/level.png';
 import planIcon from '../pngicons/plan.png';
+import tickIcon from '../pngicons/tick.png';
 
 const quotes = [
   "Breathe, feel, be honest with yourself.",
@@ -17,56 +18,79 @@ export function renderHome(container) {
   const username = user ? user.username : 'User';
   container.innerHTML = `
     <h1 class="welcome">Welcome to Feely!!</h1>
-    <div class="question-container">
-    <h3 id="question-text">${username} how are you feeling now?</h3>
-            <button class="button-home" data-view="check">
-            <img data-view="check" class="icon-home" src="${levelIcon}"/>
+
+<section class="home-section">
+  <!-- Columna izquierda: lista de preguntas -->
+  <div class="left-column">
+    <ul class="question-list">
+      <li>
+        <div class="question-container">
+          <div class="text-block">
+            <h3>${username} how are you feeling now?</h3>
+            <p>Achieve happiness that lasts</p>
+          </div>
+          <button class="button-home" data-view="check">
+            <img data-view="check" class="icon-home" src="${levelIcon}" />
             <b data-view="check">Check your feelings</b>
-            </button>
-    </div>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div class="question-container">
+          <div class="text-block">
+            <h3>Create your goals</h3>
+            <p>Achieve happiness that lasts</p>
+          </div>
+          <button class="button-home" data-view="goals">
+            <img data-view="goals" class="icon-home" src="${tickIcon}" />
+            <b data-view="goals">Check your goals</b>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-  <section class="reflexion-container">
+  <!-- Columna derecha: reflexión -->
+  <div class="right-column">
+    <section class="reflexion-container">
       <div class="quote-container">
-    <p id="quote-text">“${randomQuote}”</p>
+        <p class="quote-text">“${randomQuote}”</p>
+      </div>
+      <button class="button-home" id="write">
+        <img class="icon-home" src="./src/pngicons/light.png" alt="Write" />
+        <p>Write your own quote ideas</p>
+      </button>
+      <div class="background"></div>
+      <p>Here you can write down <br> the quotes you want to see everyday</p>
+    </section>
+  </div>
+</section>
+<section class="home-section">
+  <div class="left-column">
+    <div class="text-block">
+      <p>Here you can write down the quotes you want to see everyday</p>
+      <p>Here you can write down the quotes you want to see everyday</p>
+      <p>Here you can write down the quotes you want to see everyday</p>
     </div>
-  <button class="button-home" id="write">
-    <img class="icon-home" src="./src/pngicons/light.png" alt="Write" />
-    <p>Write your own quote ideas</p>
-  </button>
-  <div class="background"></div>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
+  </div>
+  <div class="right-column">
+    <div class="reflexion-container">
+      <p>Here you can write down the quotes you want to see everyday</p>
+      <p>Here you can write down the quotes you want to see everyday</p>
+      <p>Here you can write down the quotes you want to see everyday</p>
+    </div>
+  </div>
+</section>
 
-  </section>
-
-    <p>Here you can write down <br> the quotes you want to see everyday</p>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
-  <p>Here you can write down <br> the quotes you want to see everyday</p>
 
   `
-  const questionEl = container.querySelector('#question-text')
-  questionEl.style.opacity = '0'
-  questionEl.style.transform = 'translateX(10px)'
-
-  const quoteEl = container.querySelector('#quote-text')
-  quoteEl.style.opacity = '0'
-  quoteEl.style.transform = 'translateX(-10px)'
 
   const h1_move = container.querySelector('.welcome');
   h1_move.style.transform = 'translateY(60px)';
   h1_move.style.opacity = '0';
 
   setTimeout(() => {
-    quoteEl.style.transition = 'opacity 1s ease, transform 1s ease'
-    quoteEl.style.opacity = '1'
-    quoteEl.style.transform = 'translateY(0)'
 
-    questionEl.style.transition = 'opacity 1s ease, transform 1s ease'
-    questionEl.style.opacity = '1'
-    questionEl.style.transform = 'translateY(0)'
 
     h1_move.style.opacity = '1';
     h1_move.style.transition = 'opacity 1.8s ease, transform 1s ease';

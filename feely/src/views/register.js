@@ -8,6 +8,7 @@ export function renderRegister(container) {
       <input id="reg-username" type="text" placeholder="Username" />
       <input id="reg-email" type="text" placeholder="Email" />
       <input id="reg-password" type="password" placeholder="Password" />
+      <a data-view="login">Login here</a>
       <section class="buttons">
         <button type="submit">Enter</button>
         <button type="reset">Clear</button>
