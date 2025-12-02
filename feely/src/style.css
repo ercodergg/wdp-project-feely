@@ -13,6 +13,7 @@
 
   /* 📐 Tamaños (convertidos a em) */
   --radius-xxl: 5em;
+  --radius-l: 2em;
   /* 80px */
   --icon-size: 2.5em;
   /* 40px */
@@ -24,16 +25,18 @@
   /* 400px */
   --button-max-width-md: 18.75em;
   /* 300px */
-  --font-size-h1: 4.375em;
+  --font-size-h1: 3.2em;
   /* 70px */
-  --font-size-quote: 1.25em;
+  --font-size-quote: 1.15em;
   /* 20px */
   --font-size-nav: 1.25em;
   /* 20px */
   --font-size-mobile-h1: 1.875em;
   /* 30px */
-  --font-size-mobile-quote: 1em;
+  --font-size-mobile-quote: 0.9em;
   /* 16px */
+  --font-size-button-items: 0.8em;
+
   --footer-height: 8.125em;
   /* 130px */
   --form-width: 15.625em;
@@ -54,14 +57,14 @@
   /* 20px */
   --gap-sm: 1em;
 
-  --app-gap: 1.5em;
+  --app-gap: 0;
 
   /* Sombras */
   --shadow-text-strong: 0 0 0.625em var(--color-shadow);
   --shadow-button-hover: 0 0 0.625em var(--color-white);
   --shadow-input-focus: 0 0 0.3125em var(--color-white);
   --shadow-overlay: 0 0.5em 1.5em rgba(0, 0, 0, 0.25);
-
+  
   /* Transiciones */
   --transition-opacity-slow: opacity 0.8s ease-in-out;
   --transition-bg-hover: background-color 0.3s ease;
@@ -72,6 +75,12 @@
   --blur-bg: blur(0.3125em);
   /* 5px */
   --bg-scale: 1.05;
+
+  /*Colors for elements*/
+  --error-bg:var(--color-white);
+  --error-txt: red;
+  --error-btn-bg:red;
+  --error-btn-txt: var(--color-white);
 
   /* Gradientes */
   --gradient-day: linear-gradient(to bottom,
@@ -93,34 +102,38 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
-  overflow-x: hidden; /* evita scroll lateral */
+  overflow-x: hidden;
+  /* evita scroll lateral */
 }
 
 /* Contenedor principal */
 .home-section {
   display: flex;
   flex-direction: row;
-  width: 100vw;            /* ocupa todo el ancho de la ventana */
-  overflow: hidden;        /* evita desbordamiento lateral */
+  width: 100%;
 }
 
 /* Columnas */
 .left-column,
 .right-column {
   width: 100%;
-  padding:0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
-  flex: 1;                 /* cada columna ocupa la mitad */
-  overflow-y: auto;        /* permite scroll vertical si el contenido es largo */
+  flex: 1;
+  /* cada columna ocupa la mitad */
+  overflow-y: auto;
+  /* permite scroll vertical si el contenido es largo */
 }
 
 /* Estilo opcional para texto */
-.text-block, .reflexion-container {
+.text-block,
+.reflexion-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,8 +141,6 @@ html, body {
   color: white;
   font-size: 1.2rem;
 }
-
-
 /* Containers */
 .quote-container,
 .question-container {
@@ -141,7 +152,6 @@ html, body {
   padding-block: var(--padding-block-md);
   padding-inline: var(--padding-inline-lg);
   text-align: center;
-  max-width: 90%;
   gap: var(--gap-md);
   overflow: hidden;
 }
@@ -153,28 +163,48 @@ html, body {
   border-bottom-right-radius: 0;
 }
 
-.quote-container {
+ .quote-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--padding-block-md) var(--gap-sm); /* menos padding lateral */
+    width: 100%;  
   border-radius: var(--radius-xxl);
 }
 
 
 .back-button {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   top: 1.25em;
+  bottom:auto;  
   /* 20px */
   left: 1.25em;
   padding: 0.625em 0.9375em;
   /* 10px 15px */
+  align-items: center;
   font-size: 1em;
   background-color: var(--color-center-bg);
   color: var(--color-white);
   border: none;
   border-radius: var(--radius-xxl);
   cursor: pointer;
+  z-index: 1000;
   transition: var(--transition-bg-hover);
 }
+
 .back-button:hover {
   background-color: var(--color-mid-dark-bg);
+}
+.back-button img{
+  width: 1.8em;
+}
+.back-button b{
+  font-size: var(--font-size-button-items);
 }
 
 
@@ -185,6 +215,7 @@ html, body {
 .reflexion-container {
   position: relative;
   display: flex;
+  justify-content: centers;
   width: 100%;
   padding: 0;
   min-height: 18.75em;
@@ -193,6 +224,7 @@ html, body {
   padding-block: var(--padding-block-md);
   padding-inline: var(--padding-inline-lg);
   align-items: center;
+  text-align: center;
   gap: var(--gap-md);
   overflow: hidden;
 }
@@ -201,13 +233,13 @@ html, body {
   position: absolute;
   inset: 0;
   width: 100%;
-  background-image: url('./src/backgrounds/reflexion-background.jpg');
   background-size: cover;
   background-position: center;
-  filter: var(--blur-bg);
   transform: scale(var(--bg-scale));
   z-index: 0;
 }
+
+
 
 .reflexion-container>*:not(.background) {
   position: relative;
@@ -295,7 +327,7 @@ html, body {
 
 }
 
-.icon-home{
+.icon-home {
   width: var(--icon-size);
   border-radius: var(--radius-xxl);
   display: flex;
@@ -308,6 +340,11 @@ html, body {
 .text-block {
   text-align: right;
   color: var(--color-white);
+}
+
+.quote-text {
+  text-align: center;
+  text-shadow: var(--shadow-text-strong);
 }
 
 .question-container .quote-text p {
@@ -330,6 +367,7 @@ html, body {
 h3 {
   padding: 0;
   margin: 0;
+  color:var(--color-white);
 }
 
 /* Footer */
@@ -424,8 +462,8 @@ form button:hover {
   /* 10px */
   padding: 0.875em 1.125em;
   /* 14px 18px */
-  background-color: var(--color-white);
-  color: var(--color-black);
+  background-color: var(--error-bg);
+  color:var(--error-txt);
   border-radius: 0.5em;
   /* 8px */
   box-shadow: var(--shadow-overlay);
@@ -433,7 +471,10 @@ form button:hover {
   opacity: 0;
   pointer-events: none;
 }
-
+.error-popup button{
+  background-color: var(--error-btn-bg);
+  color:var(--error-btn-txt);
+}
 .error-popup.visible {
   opacity: 1;
   pointer-events: auto;
@@ -530,14 +571,66 @@ h1 {
 /* Lists */
 ul {
   width: 100%;
-  padding-left:var(--gap-sm);
+  box-sizing: border-box;
+  padding-left: var(--gap-sm);
   padding: var(--ul-padding);
 }
-
+  /* Lista limpia y coherente */
+  ul.question-list {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: var(--ul-padding); /* define --ul-padding o usa padding: var(--gap-sm) */
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    box-sizing: border-box;
+  }
+  
+  /* Cada fila: dos columnas (quote y question) */
+  ul.question-list li {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;          /* que ambos contenedores llenen el alto */
+    justify-content: space-between;
+    gap: var(--gap-sm);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Dos columnas con reparto proporcional del ancho */
+  li .quote-container,
+  li .question-container {
+    position: relative;            /* por los ::before/::after */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 50%;
+    min-width: 0;                  /* CLAVE: permite que el texto se ajuste y no “salga” */
+    padding-block: var(--padding-block-md);
+    padding-inline: var(--gap-sm); /* reduce padding lateral para no romper el centro */
+    text-align: center;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  /* Botones dentro del panel derecho: que no empujen el layout */
+  li .question-container {
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+    justify-content: center;       /* centrado real de los botones */
+  }
+  
+  /* Texto que realmente centra dentro del panel izquierdo */
+  li .quote-container .quote-text {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
 ul,
 li {
   list-style: none;
-  padding-right:0;
+  padding-right: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -547,7 +640,6 @@ li {
 }
 
 li {
-
   width: var(--li-width);
   flex-direction: row;
 }
@@ -562,11 +654,12 @@ ul button {
 
 /* Sections */
 .home-section {
-  width: 100vw;
+  width: 100%;
   display: flex;
   gap: var(--home-section-gap);
   flex-direction: var(--home-section-direction);
-  align-items: stretch; /* fuerza que ambas columnas se estiren a la misma altura */
+  align-items: stretch;
+  /* fuerza que ambas columnas se estiren a la misma altura */
 
 }
 
@@ -590,11 +683,11 @@ ul button {
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--color-light-gold));
 }
 
 .logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+  filter: drop-shadow(0 0 2em var(--color-light-gold));
 }
 
 /* Cards */
@@ -619,14 +712,12 @@ button {
   transition: var(--transition-border);
 }
 
-button:hover {
-  border-color: #646cff;
-}
 
 button:focus,
 button:focus-visible {
   outline: var(--transition-focus-outline);
 }
+
 
 /* 🌐 Responsive */
 @media (max-width: 48em) {
@@ -639,37 +730,85 @@ button:focus-visible {
     margin-top: 0;
   }
 
+  .button-home b {
+    font-size: var(--font-size-button-items);
+  }
+  .back-button{
+    bottom: 1.5em;
+    top: auto;
+    position: absolute;
+  }
+  
   #app {
     flex-direction: column;
   }
 
-  .quote-text {
+  .home-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quote-container .quote-text {
     font-size: var(--font-size-mobile-quote);
+
     color: var(--color-white);
-    text-shadow:
-      0.125em 0.125em 0.25em rgba(0, 0, 0, 0.5),
-      0 0 0.125em rgba(0, 0, 0, 0.3);
+    text-shadow: var(--shadow-text-strong);
   }
 
   #app ul .question-list {
     width: 100%;
   }
 
+  li {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
   .question-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 1.25em;
+    font-size: var(--font-size-mobile-quote);
+    padding:var(--gap-sm);
     /* 20px */
     gap: var(--gap-md);
+    border-top-left-radius: var(--radius-l);
+    border-bottom-left-radius: var(--radius-l);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .button-home {
+    border-radius: var(--radius-l);
+    padding:0.5em ;
+  }
+  .reflexion-container p{
+    font-size: var(--gap-sm);
+  }
+  .quote-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    max-width: none;
+    align-items: center;
+    border-radius: var(--radius-l);
+    text-align: center;
+  }
+
+  .text-block {
+    font-size: var(--font-size-mobile-quote);
   }
 
   .nav-buttons button {
-    font-size: 0.75em;
+    font-size: var(--font-size-button-items);
     /* 12px */
   }
+
 
   footer {
     display: absolute;
