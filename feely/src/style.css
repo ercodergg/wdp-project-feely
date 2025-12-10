@@ -280,7 +280,7 @@
   }
 
   .back-button:hover {
-    background-color: var(--color-mid-dark-bg);
+    background-color: var(--color-light-bg);
     outline: none;
   }
 

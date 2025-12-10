@@ -16,6 +16,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "html2canvas": "^1.4.1",
-    "smooothy": "^0.0.26"
+    "smooothy": "^0.0.26",
+    "express": "^4.19.2",
+    "path": "^0.12.7"
   }
 }
