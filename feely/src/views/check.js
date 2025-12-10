@@ -170,17 +170,22 @@ export function renderCheck(container) {
       
             let checkedtext = container.querySelector('#checked');
             checkedtext.textContent = `You have ${maxConsecutive}/5 consecutive days.`;
-      
             // Check if there is already a record for today
             const todayISO = new Date().toISOString().split('T')[0];
             const alreadyToday = sorted.find(d => String(d.day) === todayISO);
+            const fulData = alreadyToday.fulfillment;
+            const enerData = alreadyToday.energy;
+            const expData = alreadyToday.expectations;
+            const energyMap = { 30: "tired", 50: "enough", 70: "energetic" };
+            const expsMap  = { 30: "pessimism", 50: "nihilism", 70: "optimism" };
+            const fulMap   = { 30: "sad", 50: "neutral", 70: "happy" };
             if (alreadyToday) {
               checkedtext.textContent = `You already created a check for today (${todayISO}). Creating a new one will overwrite the existing record.`;
               const nameMessage = document.getElementById("name-message");
               if (nameMessage) {
                 nameMessage.innerHTML = `
-                  <p>${alreadyToday.fulfillment || "-"} ${alreadyToday.energy || "-"} ${alreadyToday.expectations || "-"} </p>
-                `;
+                <p>${fulMap[fulData] || "-"} ${energyMap[enerData] || "-"} ${expsMap[expData] || "-"} </p>
+              `;
               }
             }
       
@@ -209,7 +214,6 @@ export function renderCheck(container) {
     h1_move.style.transform = 'translateY(0)';
   }, 100);
 
-  const namemessage = container.querySelector('#name-message');
   console.log(user);
 
   const states = {
@@ -289,6 +293,9 @@ export function renderCheck(container) {
       .then(data => {
         console.log("Registro actualizado:", data);
         alert("Check enviado correctamente");
+        let checkedtext = container.querySelector('#checked');
+        checkedtext.textContent = `You have made the check of your day!`;
+
       })
       .catch(err => console.error("Error en fetch:", err));
     

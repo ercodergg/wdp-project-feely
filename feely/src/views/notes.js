@@ -52,7 +52,7 @@ export function renderNotes(container) {
     li.innerHTML = `
       <div class="note-row">
         <p class="note-text">${note.text}</p>
-        <button class="button-home" data-note-delete="${note.id}">x</button>
+        <button class="button-home" id="delete" data-note-delete="${note.id}">x</button>
       </div>
     `;
 
@@ -121,4 +121,41 @@ export function renderNotes(container) {
 
   // inicializar
   if (email) loadNotesForUser(email);
+
+
+  // Attach delete handler
+  const deleteBtn = li.querySelector('.delete-btn');
+  deleteBtn.addEventListener('click', async () => {
+    if (!email) {
+      alert('No user email found in localStorage.');
+      return;
+    }
+    await deleteNote(email, note.id);
+  });
+
+  notesList.appendChild(li);
+}
+
+async function deleteNote(email, id) {
+  try {
+    const res = await fetch(
+      `https://wdp-project-feely.onrender.com/notes/${encodeURIComponent(email)}/${id}`,
+      { method: 'DELETE' }
+    );
+
+    if (!res.ok) {
+      throw new Error('Failed to delete note');
+    }
+
+    const payload = await res.json();
+    console.log('Note deleted from server:', payload);
+
+    // Remove from DOM
+    const node = document.querySelector(`[data-note-id="${id}"]`);
+    if (node) node.remove();
+  } catch (err) {
+    console.error('Error deleting note:', err);
+    alert('Could not delete the note. Please try again.');
+  }
+
 }
