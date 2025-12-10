@@ -1,6 +1,18 @@
 {
   "user123@gmail.com": [
     {
+        "day": "2025-12-06",
+        "energy": 50,
+        "expectations": 30,
+        "fulfillment": 70
+    },
+    {
+        "day": "2025-12-07",
+        "energy": 50,
+        "expectations": 30,
+        "fulfillment": 70
+    },
+    {
       "day": "2025-12-08",
       "energy": 50,
       "expectations": 30,
