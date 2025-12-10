@@ -48,7 +48,7 @@ export function renderQuotes(container) {
 
   async function loadQuotes() {
     try {
-      const res = await fetch(`http://localhost:3000/quotes`);
+      const res = await fetch(`https://wdp-project-feely.onrender.com/quotes`);
       if (!res.ok) throw new Error('Failed to load quotes');
       const quotes = await res.json();
       quotesList.innerHTML = '';
@@ -71,7 +71,7 @@ export function renderQuotes(container) {
     renderQuote(newQuote);
 
     try {
-      const res = await fetch(`http://localhost:3000/quotes`, {
+      const res = await fetch(`https://wdp-project-feely.onrender.com/quotes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newQuote)

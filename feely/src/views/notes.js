@@ -61,7 +61,7 @@ export function renderNotes(container) {
 
   async function loadNotesForUser(email) {
     try {
-      const res = await fetch(`http://localhost:3000/notes/${encodeURIComponent(email)}`);
+      const res = await fetch(`https://wdp-project-feely.onrender.com/notes/${encodeURIComponent(email)}`);
       if (!res.ok) throw new Error('Failed to load notes');
       const notes = await res.json();
       notesList.innerHTML = '';
@@ -83,7 +83,7 @@ export function renderNotes(container) {
     renderNote(newNote); // render optimista
 
     try {
-      const res = await fetch(`http://localhost:3000/notes/${encodeURIComponent(email)}`, {
+      const res = await fetch(`https://wdp-project-feely.onrender.com/notes/${encodeURIComponent(email)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newNote)

@@ -87,7 +87,7 @@ function submitLogin(event, container) {
 
   hideErrors(errorPopup, errorOverlay);
 
-  fetch('http://localhost:3000/user')
+  fetch('https://wdp-project-feely.onrender.com/user')
     .then(res => res.json())
     .then(users => {
       const foundUser = users.find(u => u.username === username && u.password === password);

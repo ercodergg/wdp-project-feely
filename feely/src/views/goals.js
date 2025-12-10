@@ -78,7 +78,7 @@ goalsList.addEventListener('click', (e) => {
   
     // Actualizar en servidor
     const completed = !isTick;
-    fetch(`http://localhost:3000/goals/${encodeURIComponent(email)}/${encodeURIComponent(toggleId)}`, {
+    fetch(`https://wdp-project-feely.onrender.com/goals/${encodeURIComponent(email)}/${encodeURIComponent(toggleId)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed })
@@ -93,7 +93,7 @@ goalsList.addEventListener('click', (e) => {
 
   // Cargar goals desde el servidor
   function loadGoalsForUser(email) {
-    return fetch(`http://localhost:3000/goals/${encodeURIComponent(email)}`)
+    return fetch(`https://wdp-project-feely.onrender.com/goals/${encodeURIComponent(email)}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load goals');
         return res.json();
@@ -131,7 +131,7 @@ goalsList.addEventListener('click', (e) => {
 
       console.log("Nuevo goal creado en frontend:", newGoal);
 
-      const response = await fetch(`http://localhost:3000/goals/${encodeURIComponent(email)}`, {
+      const response = await fetch(`https://wdp-project-feely.onrender.com/goals/${encodeURIComponent(email)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newGoal)
@@ -160,7 +160,7 @@ goalsList.addEventListener('click', (e) => {
     if (!toggleId) return;
     const completed = e.target.checked;
 
-    fetch(`http://localhost:3000/goals/${encodeURIComponent(email)}/${encodeURIComponent(toggleId)}`, {
+    fetch(`https://wdp-project-feely.onrender.com/goals/${encodeURIComponent(email)}/${encodeURIComponent(toggleId)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed })
@@ -177,7 +177,7 @@ goalsList.addEventListener('click', (e) => {
     const deleteId = e.target.getAttribute('data-goal-delete');
     if (!deleteId) return;
 
-    fetch(`http://localhost:3000/goals/${encodeURIComponent(email)}/${encodeURIComponent(deleteId)}`, {
+    fetch(`https://wdp-project-feely.onrender.com/goals/${encodeURIComponent(email)}/${encodeURIComponent(deleteId)}`, {
       method: 'DELETE'
     })
       .then(res => res.json())

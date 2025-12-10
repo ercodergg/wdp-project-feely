@@ -130,7 +130,7 @@ function submitRegister(event, container) {
 
   const newUser = { username, email, password };
 
-  fetch('http://localhost:3000/user', {
+  fetch('https://wdp-project-feely.onrender.com/users', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newUser)

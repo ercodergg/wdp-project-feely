@@ -270,7 +270,7 @@ export function renderWeeklyBalance(container) {
   const user = JSON.parse(localStorage.getItem('user'));
   // 👉 Obtener registros del backend
   if (user && user.email) {
-    fetch(`http://localhost:3000/weekcheck/${user.email}`)
+    fetch(`https://wdp-project-feely.onrender.com/weekcheck/${user.email}`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {

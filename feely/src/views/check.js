@@ -132,7 +132,7 @@ export function renderCheck(container) {
         }
       }   
       if (user && user.email) {
-        fetch(`http://localhost:3000/weekcheck/${user.email}`)
+        fetch(`https://wdp-project-feely.onrender.com/weekcheck/${user.email}`)
         .then(res => {
           if (res.status === 404) return [];
           if (!res.ok) {
@@ -255,7 +255,8 @@ export function renderCheck(container) {
       }
     }));
 
-    fetch("http://localhost:3000/weekcheck", {
+    // fetch("http://localhost:3000/weekcheck", {
+    fetch ( "https://wdp-project-feely.onrender.com/weekcheck", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCheck)
