@@ -3,7 +3,12 @@ import planIcon from '../pngicons/plan.png';
 import tickIcon from '../pngicons/tick.png';
 import logoutIcon from '../pngicons/logout.png';
 import drawIcon from '../pngicons/draw.png';
+import lightIcon from '../pngicons/light.png';
 import { navigate } from '../main.js';
+import reflexionBackground from '../backgrounds/reflexion-background.jpg';
+import relaxBackground from '../backgrounds/relax1-background.jpg';
+import noteBackground from '../background/note-background.jpg';
+
 import Smooothy from 'smooothy';
 
 // variable global accesible en navigate
@@ -18,7 +23,7 @@ export async function renderHome(container) {
 
   let randomQuoteObj;
   try {
-    const res = await fetch('http://localhost:3000/quotes/random');
+    const res = await fetch('https://wdp-project-feely.onrender.com/quotes/random');
     if (res.status === 404) {
       randomQuoteObj = { quote: "No quotes yet, add one!", author: "System" };
     } else if (!res.ok) {
@@ -89,7 +94,7 @@ export async function renderHome(container) {
   <!-- Columna derecha: reflexión -->
   <div class="right-column">
     <section class="reflexion-container">
-      <div class="background" data-bg="./src/backgrounds/relax1-background.jpg"></div>
+      <div class="background" data-bg="${relaxBackground}"></div>
     </section>
   </div>
 </section>
@@ -102,7 +107,7 @@ export async function renderHome(container) {
             ${randomAuthor}</p>
       </div>
       <button class="button-home" data-view="quotes">
-        <img class="icon-home" data-view="quotes" src="./src/pngicons/light.png" />
+        <img data-view="quotes" class="icon-home" src="${lightIcon}" />
         <b data-view="quotes" >Write your own quote ideas</b>
       </button>
         <p>Here you can write down</p>
@@ -131,6 +136,7 @@ export async function renderHome(container) {
         <p class="quote-text">Write down the new goals you have and then check them when completed.</p>
       </div>
       <div class="background" data-bg="./src/backgrounds/note-background.jpg"></div>
+      
     </section>
   </div>
   <div class="right-column">

@@ -1,3 +1,4 @@
+ 
   :root {
     /* 🎨 Colores */
     font-family: "Dela Gothic One", system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -351,12 +352,13 @@
   }
 
   .quote-container::before {
-    background: url("./gifs/quote-container.jpeg") no-repeat center/cover;
+    background: url("/gifs/quote-container.jpeg") no-repeat center/cover;
   }
-
+  
   .question-container::before {
-    background: url("./gifs/question-container.jpeg") no-repeat center/cover;
+    background: url("/gifs/question-container.jpeg") no-repeat center/cover;
   }
+  
 
   .quote-container::after,
   .question-container::after {
