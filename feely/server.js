@@ -145,23 +145,34 @@ app.post('/weekcheck', (req, res) => {
   }
 
   const weekData = readWeekcheck();
-  const newEntry = { day, energy, expectations, fulfillment };
-
   if (!weekData[email]) {
     weekData[email] = [];
   }
 
-  weekData[email].push(newEntry);
+  // Buscar si ya existe un registro para ese día
+  let existing = weekData[email].find(r => r.day === day);
 
-  // Mantener solo los últimos 7 registros
-  if (weekData[email].length > 7) {
-    weekData[email] = weekData[email].slice(-7);
+  if (existing) {
+    // Sobrescribir valores
+    existing.energy = energy;
+    existing.expectations = expectations;
+    existing.fulfillment = fulfillment;
+  } else {
+    // Crear nuevo registro
+    const newEntry = { day, energy, expectations, fulfillment };
+    weekData[email].push(newEntry);
+
+    // Mantener solo los últimos 7 registros
+    if (weekData[email].length > 7) {
+      weekData[email] = weekData[email].slice(-7);
+    }
   }
 
   writeWeekcheck(weekData);
 
-  res.json({ message: 'Check registrado', data: weekData[email] });
+  res.json({ message: existing ? 'Check sobrescrito' : 'Check registrado', data: weekData[email] });
 });
+
 
 // NUEVA RUTA DELETE para borrar weekcheck de un usuario concreto
 app.delete('/weekcheck/:email', (req, res) => {
