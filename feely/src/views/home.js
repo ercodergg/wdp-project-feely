@@ -79,12 +79,12 @@ export async function renderHome(container) {
             <li>
         <div class="question-container">
           <div class="text-block">
-            <h3>Create your goals</h3>
-            <p>Achieve happiness that lasts</p>
+            <h3>Relax Ambience</h3>
+            <p>Listen to smooth sounds</p>
           </div>
-          <button class="button-home" data-view="goals">
-            <img data-view="goals" class="icon-home" src="${tickIcon}" />
-            <b data-view="goals">Check your goals</b>
+          <button class="button-home" data-view="relaxambience">
+            <img data-view="relaxambience" class="icon-home" src="${soundIcon}" />
+            <b data-view="relaxambience">Relax your ambience</b>
           </button>
         </div>
       </li>

@@ -8,6 +8,7 @@ import { renderWeeklyBalance } from './views/weekly_balance.js';
 import { renderGoals } from './views/goals.js';
 import { renderNotes } from './views/notes.js';
 import { renderQuotes } from './views/quotes.js';
+import { renderRelaxAmbience } from './views/relaxambience.js';
 const app = document.querySelector('#app');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,6 +69,9 @@ export function navigate(view) {
       break;
     case 'quotes':
       renderQuotes(app);
+      break;
+    case 'relaxambience':
+      renderRelaxAmbience(app);
       break;
     default:
       renderHome(app);
