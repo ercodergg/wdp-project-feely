@@ -169,7 +169,7 @@ export function renderCheck(container) {
             });
 
             let checkedtext = container.querySelector('#checked');
-            checkedtext.text = `You already checked feelings in ${currentWeekRecords} days!`;
+            checkedtext.textContent = `You already checked feelings in ${currentWeekRecords} days!`;
       
             if (currentWeekRecords.length >= 7) {
               setWeeklyButton(true);
