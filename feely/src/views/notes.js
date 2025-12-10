@@ -51,7 +51,8 @@ export function renderNotes(container) {
   
     li.innerHTML = `
       <div class="note-row">
-        <p class="note-text">${note.text}</p>Delete</button>
+        <p class="note-text">${note.text}</p>
+        <button class="button-home delete-btn" data-note-delete="${note.id}">Delete</button>
       </div>
     `;
   
@@ -68,6 +69,7 @@ export function renderNotes(container) {
     notesList.appendChild(li);
   }
   
+
 
   async function loadNotesForUser(email) {
     try {
@@ -142,7 +144,7 @@ export function renderNotes(container) {
     }
     await deleteNote(email, note.id);
   });
-  
+
   notesList.appendChild(li);
 }
 
