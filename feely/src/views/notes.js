@@ -44,20 +44,30 @@ export function renderNotes(container) {
   function renderNote(note) {
     const exists = document.querySelector(`[data-note-id="${note.id}"]`);
     if (exists) return;
-
+  
     const li = document.createElement('li');
     li.dataset.noteId = note.id;
     li.className = 'note-item';
-
+  
     li.innerHTML = `
       <div class="note-row">
-        <p class="note-text">${note.text}</p>
-        <button class="button-home" id="delete" data-note-delete="${note.id}">x</button>
+        <p class="note-text">${note.text}</p>Delete</button>
       </div>
     `;
-
+  
+    // Attach delete handler here
+    const deleteBtn = li.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', async () => {
+      if (!email) {
+        alert('No user email found in localStorage.');
+        return;
+      }
+      await deleteNote(email, note.id);
+    });
+  
     notesList.appendChild(li);
   }
+  
 
   async function loadNotesForUser(email) {
     try {
@@ -132,7 +142,7 @@ export function renderNotes(container) {
     }
     await deleteNote(email, note.id);
   });
-
+  
   notesList.appendChild(li);
 }
 
@@ -157,5 +167,5 @@ async function deleteNote(email, id) {
     console.error('Error deleting note:', err);
     alert('Could not delete the note. Please try again.');
   }
-
 }
+
