@@ -106,7 +106,7 @@ export function renderCheck(container) {
         </button>
         <button class="button-home-unabled" data-view="weekly_balance">
         <img   data-view="weekly_balance" class="icon-home" src="${planIcon}" />
-        <p  data-view="weekly_balance">Weekly Balance</p>
+        <p  data-view="weekly_balance">5 Day Balance</p>
         </button>
         </div>
         </li>
@@ -138,46 +138,42 @@ export function renderCheck(container) {
           .then(res => {
             if (res.status === 404) return [];
             if (!res.ok) {
-              console.warn("Respuesta no OK al pedir weekcheck:", res.status);
+              console.warn("Response not OK when requesting weekcheck:", res.status);
               return [];
             }
             return res.json();
-          })        
+          })
           .then(rawData => {
             const data = Array.isArray(rawData) ? rawData : [];
-            console.log("Registros del usuario:", data);
+            console.log("User records:", data);
       
-            // Current week range — Monday 00:00:00 to next Monday 00:00:00
-            const now = new Date();
-            const dayOfWeek = (now.getDay() + 6) % 7; // Monday=0 ... Sunday=6
-            const startOfWeek = new Date(now);
-            startOfWeek.setDate(now.getDate() - dayOfWeek);
-            startOfWeek.setHours(0, 0, 0, 0);
+            // Sort records by ascending date
+            const sorted = data
+              .filter(d => d && d.day)
+              .sort((a, b) => new Date(a.day) - new Date(b.day));
       
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 7);
-            endOfWeek.setHours(0, 0, 0, 0);
+            // Check if there are 5 consecutive days
+            let consecutiveCount = 1;
+            let maxConsecutive = 1;
+            for (let i = 1; i < sorted.length; i++) {
+              const prev = new Date(sorted[i - 1].day);
+              const curr = new Date(sorted[i].day);
+              const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
       
-            // Filter records for current week
-            const currentWeekRecords = data.filter(d => {
-              if (!d || !d.day) return false;
-              const [yyyy, mm, dd] = String(d.day).split('-').map(Number);
-              const dayDate = new Date(yyyy, (mm || 1) - 1, dd || 1);
-              return dayDate >= startOfWeek && dayDate < endOfWeek;
-            });
-      
-            const n = currentWeekRecords.length;
-            let checkedtext = container.querySelector('#checked');
-      
-            if (n === 7) {
-              checkedtext.textContent = `You checked feelings of all the week, get the weekcheck below!`;
-            } else {
-              checkedtext.textContent = `You already checked feelings in ${n} days!`;
+              if (diffDays === 1) {
+                consecutiveCount++;
+                maxConsecutive = Math.max(maxConsecutive, consecutiveCount);
+              } else {
+                consecutiveCount = 1;
+              }
             }
       
-            // Nueva comprobación: ¿ya existe un check para hoy?
-            const todayISO = now.toISOString().split('T')[0]; // yyyy-mm-dd
-            const alreadyToday = currentWeekRecords.find(d => String(d.day) === todayISO);
+            let checkedtext = container.querySelector('#checked');
+            checkedtext.textContent = `You have ${maxConsecutive}/5 consecutive days.`;
+      
+            // Check if there is already a record for today
+            const todayISO = new Date().toISOString().split('T')[0];
+            const alreadyToday = sorted.find(d => String(d.day) === todayISO);
             if (alreadyToday) {
               checkedtext.textContent = `You already created a check for today (${todayISO}). Creating a new one will overwrite the existing record.`;
               const nameMessage = document.getElementById("name-message");
@@ -188,13 +184,14 @@ export function renderCheck(container) {
               }
             }
       
-            if (currentWeekRecords.length >= 7) {
+            // Enable button only if there are at least 5 consecutive days
+            if (maxConsecutive >= 5) {
               setWeeklyButton(true);
             } else {
               setWeeklyButton(false);
             }
           })
-          .catch(err => console.error("Error al comprobar weekly balance:", err));
+          .catch(err => console.error("Error checking 5 consecutive days:", err));
       }
       
       

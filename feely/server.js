@@ -135,7 +135,6 @@ app.get('/weekcheck/:email', (req, res) => {
   res.json(records);
 });
 
-
 app.post('/weekcheck', (req, res) => {
   console.log("Nuevo check recibido:", req.body);
   const { email, day, energy, expectations, fulfillment } = req.body;
@@ -149,7 +148,26 @@ app.post('/weekcheck', (req, res) => {
     weekData[email] = [];
   }
 
-  // Buscar si ya existe un registro para ese día
+  // --- 1. Comprobar si el ciclo anterior ya está completo (5 días consecutivos) ---
+  const sorted = weekData[email].sort((a, b) => new Date(a.day) - new Date(b.day));
+  let streak = 1;
+  for (let i = 1; i < sorted.length; i++) {
+    const prev = new Date(sorted[i - 1].day);
+    const curr = new Date(sorted[i].day);
+    const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
+    if (diffDays === 1) {
+      streak++;
+    } else {
+      streak = 1;
+    }
+  }
+
+  if (streak >= 5) {
+    //  Si ya completó el ciclo, borramos los registros anteriores
+    weekData[email] = [];
+  }
+
+  // --- 2. Buscar si ya existe un registro para ese día ---
   let existing = weekData[email].find(r => r.day === day);
 
   if (existing) {
@@ -161,17 +179,17 @@ app.post('/weekcheck', (req, res) => {
     // Crear nuevo registro
     const newEntry = { day, energy, expectations, fulfillment };
     weekData[email].push(newEntry);
-
-    // Mantener solo los últimos 7 registros
-    if (weekData[email].length > 7) {
-      weekData[email] = weekData[email].slice(-7);
-    }
   }
 
   writeWeekcheck(weekData);
 
-  res.json({ message: existing ? 'Check sobrescrito' : 'Check registrado', data: weekData[email] });
+  res.json({ 
+    message: existing ? 'Check sobrescrito' : 'Check registrado', 
+    data: weekData[email] 
+  });
 });
+
+
 
 
 // NUEVA RUTA DELETE para borrar weekcheck de un usuario concreto
