@@ -177,7 +177,7 @@ export function renderCheck(container) {
       
             // Nueva comprobación: ¿ya existe un check para hoy?
             const todayISO = now.toISOString().split('T')[0]; // yyyy-mm-dd
-            const alreadyToday = currentWeekRecords.some(d => String(d.day) === todayISO);
+            const alreadyToday = currentWeekRecords.find(d => String(d.day) === todayISO);
             if (alreadyToday) {
               checkedtext.textContent = `You already created a check for today (${todayISO}). Creating a new one will overwrite the existing record.`;
               const nameMessage = document.getElementById("name-message");
