@@ -147,53 +147,32 @@ export function renderCheck(container) {
             const data = Array.isArray(rawData) ? rawData : [];
             console.log("User records:", data);
       
-            // Sort records by ascending date
-            const sorted = data
-              .filter(d => d && d.day)
-              .sort((a, b) => new Date(a.day) - new Date(b.day));
+            // Llamada a la función separada
+            updateConsecutiveButton(data, container);
       
-            // Check if there are 5 consecutive days
-            let consecutiveCount = 1;
-            let maxConsecutive = 1;
-            for (let i = 1; i < sorted.length; i++) {
-              const prev = new Date(sorted[i - 1].day);
-              const curr = new Date(sorted[i].day);
-              const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
-      
-              if (diffDays === 1) {
-                consecutiveCount++;
-                maxConsecutive = Math.max(maxConsecutive, consecutiveCount);
-              } else {
-                consecutiveCount = 1;
-              }
-            }
-      
-            let checkedtext = container.querySelector('#checked');
-            checkedtext.textContent = `You have ${maxConsecutive}/5 consecutive days.`;
-            // Check if there is already a record for today
+            // Check si ya existe un registro para hoy
             const todayISO = new Date().toISOString().split('T')[0];
-            const alreadyToday = sorted.find(d => String(d.day) === todayISO);
-            const fulData = alreadyToday.fulfillment;
-            const enerData = alreadyToday.energy;
-            const expData = alreadyToday.expectations;
-            const energyMap = { 30: "tired", 50: "enough", 70: "energetic" };
-            const expsMap  = { 30: "pessimism", 50: "nihilism", 70: "optimism" };
-            const fulMap   = { 30: "sad", 50: "neutral", 70: "happy" };
+            const alreadyToday = data.find(d => String(d.day) === todayISO);
+      
             if (alreadyToday) {
-              checkedtext.textContent = `You already created a check for today (${todayISO}). Creating a new one will overwrite the existing record.`;
+              const fulData = alreadyToday.fulfillment;
+              const enerData = alreadyToday.energy;
+              const expData = alreadyToday.expectations;
+              const energyMap = { 30: "tired", 50: "enough", 70: "energetic" };
+              const expsMap  = { 30: "pessimism", 50: "nihilism", 70: "optimism" };
+              const fulMap   = { 30: "sad", 50: "neutral", 70: "happy" };
+      
+              const checkedtext = container.querySelector('#checked');
+              if (checkedtext) {
+                checkedtext.textContent = `You already created a check for today (${todayISO}). Creating a new one will overwrite the existing record.`;
+              }
+      
               const nameMessage = document.getElementById("name-message");
               if (nameMessage) {
                 nameMessage.innerHTML = `
-                <p>${fulMap[fulData] || "-"} ${energyMap[enerData] || "-"} ${expsMap[expData] || "-"} </p>
-              `;
+                  <p>${fulMap[fulData] || "-"} ${energyMap[enerData] || "-"} ${expsMap[expData] || "-"} </p>
+                `;
               }
-            }
-      
-            // Enable button only if there are at least 5 consecutive days
-            if (maxConsecutive >= 5) {
-              setWeeklyButton(true);
-            } else {
-              setWeeklyButton(false);
             }
           })
           .catch(err => console.error("Error checking 5 consecutive days:", err));
@@ -215,6 +194,44 @@ export function renderCheck(container) {
   }, 100);
 
   console.log(user);
+
+  function getMaxConsecutiveDays(records) {
+    const sorted = records
+      .filter(d => d && d.day)
+      .sort((a, b) => new Date(a.day) - new Date(b.day));
+  
+    let consecutiveCount = 1;
+    let maxConsecutive = 1;
+  
+    for (let i = 1; i < sorted.length; i++) {
+      const prev = new Date(sorted[i - 1].day);
+      const curr = new Date(sorted[i].day);
+      const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
+  
+      if (diffDays === 1) {
+        consecutiveCount++;
+        maxConsecutive = Math.max(maxConsecutive, consecutiveCount);
+      } else {
+        consecutiveCount = 1;
+      }
+    }
+  
+    return maxConsecutive;
+  }
+  function updateConsecutiveButton(records, container) {
+    const maxConsecutive = getMaxConsecutiveDays(records);
+    const checkedtext = container.querySelector('#checked');
+  
+    if (checkedtext) {
+      checkedtext.textContent = `You have ${maxConsecutive}/5 consecutive days.`;
+    }
+  
+    if (maxConsecutive >= 5) {
+      setWeeklyButton(true);
+    } else {
+      setWeeklyButton(false);
+    }
+  }
 
   const states = {
     energy: ["tired", "enough", "energetic"],
@@ -292,11 +309,11 @@ export function renderCheck(container) {
       })
       .then(data => {
         console.log("Registro actualizado:", data);
-        alert("Check enviado correctamente");
         let checkedtext = container.querySelector('#checked');
         checkedtext.textContent = `You have made the check of your day!`;
-
-      })
+        // Recalcular consecutivos y actualizar botón
+        updateConsecutiveButton(data.data, container);
+      })      
       .catch(err => console.error("Error en fetch:", err));
     
   });

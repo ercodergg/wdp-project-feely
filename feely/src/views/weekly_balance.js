@@ -9,7 +9,7 @@ export function renderWeeklyBalance(container) {
                   <img data-view="home" class="icon-home" src="${backIcon}" />
                   <p>Back</p>
                   </button>
-                  <h1 class="welcome">Weekly Balance</h1> 
+                  <h1 class="welcome">Balance</h1> 
               </div>
           <ul>
           <li>
