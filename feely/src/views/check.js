@@ -135,20 +135,19 @@ export function renderCheck(container) {
       }   
       if (user && user.email) {
         fetch(`https://wdp-project-feely.onrender.com/weekcheck/${user.email}`)
-        .then(res => {
-          if (res.status === 404) return [];
-          if (!res.ok) {
-            console.warn("Respuesta no OK al pedir weekcheck:", res.status);
-            return [];
-          }
-          return res.json();
-        })        
+          .then(res => {
+            if (res.status === 404) return [];
+            if (!res.ok) {
+              console.warn("Respuesta no OK al pedir weekcheck:", res.status);
+              return [];
+            }
+            return res.json();
+          })        
           .then(rawData => {
-            // Normalize data shape
             const data = Array.isArray(rawData) ? rawData : [];
             console.log("Registros del usuario:", data);
       
-            // Current week range — Monday 00:00:00 to next Monday 00:00:00 — timezone safe
+            // Current week range — Monday 00:00:00 to next Monday 00:00:00
             const now = new Date();
             const dayOfWeek = (now.getDay() + 6) % 7; // Monday=0 ... Sunday=6
             const startOfWeek = new Date(now);
@@ -159,34 +158,40 @@ export function renderCheck(container) {
             endOfWeek.setDate(startOfWeek.getDate() + 7);
             endOfWeek.setHours(0, 0, 0, 0);
       
-            // Filter records for current week, guard missing fields
+            // Filter records for current week
             const currentWeekRecords = data.filter(d => {
               if (!d || !d.day) return false;
-              // parse ISO yyyy-mm-dd in local time to avoid UTC shifting
               const [yyyy, mm, dd] = String(d.day).split('-').map(Number);
               const dayDate = new Date(yyyy, (mm || 1) - 1, dd || 1);
               return dayDate >= startOfWeek && dayDate < endOfWeek;
             });
-
+      
             const n = currentWeekRecords.length;
             let checkedtext = container.querySelector('#checked');
-            if(n === 7){
-              checkedtext.textContent = `You checked feelings of all the week, get the weekcheck bellow! `;
-            }
-            else{
+      
+            if (n === 7) {
+              checkedtext.textContent = `You checked feelings of all the week, get the weekcheck below!`;
+            } else {
               checkedtext.textContent = `You already checked feelings in ${n} days!`;
+            }
+      
+            // Nueva comprobación: ¿ya existe un check para hoy?
+            const todayISO = now.toISOString().split('T')[0]; // yyyy-mm-dd
+            const alreadyToday = currentWeekRecords.some(d => String(d.day) === todayISO);
+      
+            if (alreadyToday) {
+              checkedtext.textContent = `You already created a check for today (${todayISO}). Creating a new one will overwrite the existing record.`;
             }
       
             if (currentWeekRecords.length >= 7) {
               setWeeklyButton(true);
             } else {
               setWeeklyButton(false);
-              // Ya no borramos aquí, el backend se encarga
             }
-            
           })
           .catch(err => console.error("Error al comprobar weekly balance:", err));
-      } 
+      }
+      
       
   const back = container.querySelector('#back');
   back.addEventListener('click', (event) => {
