@@ -7,7 +7,7 @@ import lightIcon from '../pngicons/light.png';
 import { navigate } from '../main.js';
 import reflexionBackground from '../backgrounds/reflexion-background.jpg';
 import relaxBackground from '../backgrounds/relax1-background.jpg';
-import noteBackground from '../background/note-background.jpg';
+import noteBackground from '../backgrounds/note-background.jpg';
 
 import Smooothy from 'smooothy';
 
