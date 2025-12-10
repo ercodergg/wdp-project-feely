@@ -1,6 +1,7 @@
 import backIcon from '../pngicons/back.png';
 import soundIcon from '../pngicons/sound.png';
 import soundwaterfall from '../sounds/smoothwaterfall.mp3';
+import sounddeepsynth from '../sounds/deepsynth.mp3';
 import reflexionBackground from '../backgrounds/reflexion-background.jpg';
 import { navigate } from '../main.js';
 
@@ -13,14 +14,26 @@ export function renderRelaxAmbience(container) {
       </button>
       <h1 class="welcome">Relax Ambience</h1> 
     </div>
-    <ul>
+    <ul class="question-list">
       <li>
         <div class="quote-container">
           <p class="quote-text">Smooth sound waterfall to reflect deeper</p>
         </div>
         <div class="question-container">
-          <button class="button-home" id="sound-btn">
+          <button class="button-home sound-btn" data-sound="soundwaterfall">
             <img class="icon-home" src="${soundIcon}" />
+            <p>Play</p>
+          </button>
+        </div>
+      </li>
+      <li>
+        <div class="quote-container">
+          <p class="quote-text">Deep Synth Sound</p>
+        </div>
+        <div class="question-container">
+          <button class="button-home sound-btn" data-sound="sounddeepsynth">
+            <img class="icon-home" src="${soundIcon}" />
+            <p>Play</p>
           </button>
         </div>
       </li>
@@ -52,20 +65,30 @@ export function renderRelaxAmbience(container) {
     navigate('home');
   });
 
-  // --- Audio toggle ---
-  const audio = new Audio(soundwaterfall);
-  audio.loop = true; // opcional: que se repita en bucle
+  // --- Audio toggle for multiple sounds ---
+  const soundsMap = {
+    soundwaterfall,
+    sounddeepsynth
+    // aquí puedes añadir más sonidos en el futuro
+  };
 
-  const soundBtn = container.querySelector('#sound-btn');
-  soundBtn.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play();
-      soundBtn.querySelector('p')?.remove(); // opcional: limpiar texto
-      soundBtn.insertAdjacentHTML('beforeend', '<p>Pause</p>');
-    } else {
-      audio.pause();
-      soundBtn.querySelector('p')?.remove();
-      soundBtn.insertAdjacentHTML('beforeend', '<p>Play</p>');
-    }
+  // Crear un objeto Audio para cada botón
+  const audioPlayers = {};
+
+  container.querySelectorAll('.sound-btn').forEach(btn => {
+    const soundKey = btn.getAttribute('data-sound');
+    const audio = new Audio(soundsMap[soundKey]);
+    audio.loop = true;
+    audioPlayers[soundKey] = audio;
+
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        btn.querySelector('p').textContent = 'Pause';
+      } else {
+        audio.pause();
+        btn.querySelector('p').textContent = 'Play';
+      }
+    });
   });
 }
