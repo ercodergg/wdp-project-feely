@@ -18,6 +18,7 @@ import workIcon from '../pngicons/work.png';
 import planIcon from '../pngicons/plan.png';
 import tickIcon from '../pngicons/tick.png';
 import { navigate } from '../main.js';
+import reflexionBackground from '../backgrounds/reflexion-background.jpg';
 import Smooothy from 'smooothy';
 
 // variable global accesible en navigate
@@ -97,7 +98,7 @@ export function renderCheck(container) {
         </li>
         <li>
         <div class="reflexion-container">
-        <div class="background" data-bg="./src/backgrounds/reflexion-background.jpg"></div>
+        <div class="background" data-bg="${reflexionBackground}"></div>
         <button id="submit-check" class="button-home">
         <img  class="icon-home" src="${tickIcon}" />
         <p>Submit Check</p>

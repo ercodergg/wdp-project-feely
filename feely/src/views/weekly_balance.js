@@ -1,6 +1,7 @@
 import backIcon from '../pngicons/back.png';
 import downIcon from '../pngicons/downloads.png';
 import html2canvas from 'html2canvas';
+import reflexionBackground from '../backgrounds/reflexion-background.jpg';
 export function renderWeeklyBalance(container) {
   container.innerHTML = `
               <div class="nav-buttons">
@@ -51,7 +52,7 @@ export function renderWeeklyBalance(container) {
                             stance suggests you are not experiencing strong ethical
                               conflict, but you are also not drawing significant motivation
                               from values or purpose.</p>
-                          <div class="background" data-bg="./src/backgrounds/reflexion-background.jpg"></div>
+                          <div class="background" data-bg="${reflexionBackground}"></div>
                           </section>
                       </div>
                       <div class="right-column">

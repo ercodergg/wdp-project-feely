@@ -101,7 +101,7 @@ export async function renderHome(container) {
 <section class="home-section">
   <div class="left-column">
       <div class="reflexion-container">
-      <div class="background" data-bg="./src/backgrounds/reflexion-background.jpg"></div>
+      <div class="background" data-bg="${reflexionBackground}"></div>
       <div class="quote-container">
           <p class="quote-text">"${randomQuote}" <br/>
             ${randomAuthor}</p>
@@ -135,7 +135,7 @@ export async function renderHome(container) {
       <div class="quote-container">
         <p class="quote-text">Write down the new goals you have and then check them when completed.</p>
       </div>
-      <div class="background" data-bg="./src/backgrounds/note-background.jpg"></div>
+      <div class="background" data-bg="${noteBackground}"></div>
       
     </section>
   </div>
