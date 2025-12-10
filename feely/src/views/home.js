@@ -2,27 +2,46 @@ import levelIcon from '../pngicons/level.png';
 import planIcon from '../pngicons/plan.png';
 import tickIcon from '../pngicons/tick.png';
 import logoutIcon from '../pngicons/logout.png';
+import drawIcon from '../pngicons/draw.png';
 import { navigate } from '../main.js';
-const quotes = [
-  "Breathe, feel, be honest with yourself.",
-  "Your emotions are valid, even when messy.",
-  "Pause. Listen. Let it move through you.",
-  "You are allowed to feel everything.",
-  "Naming your feeling is the first step to healing.",
-  "Softness is strength. Vulnerability is clarity."
-];
+import Smooothy from 'smooothy';
 
-export function renderHome(container) {
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
+// variable global accesible en navigate
+
+
+
+export async function renderHome(container) {
+
   const storedUser = localStorage.getItem('user');
   let user = JSON.parse(storedUser);
   const username = user ? user.username : 'User';
+
+  let randomQuoteObj;
+  try {
+    const res = await fetch('http://localhost:3000/quotes/random');
+    if (res.status === 404) {
+      randomQuoteObj = { quote: "No quotes yet, add one!", author: "System" };
+    } else if (!res.ok) {
+      throw new Error("No se pudo obtener quotes");
+    } else {
+      randomQuoteObj = await res.json();
+    }
+  } catch (error) {
+    console.error("Error consultando el servidor de quotes", error);
+    randomQuoteObj = { quote: "Error loading quotes", author: "System" };
+  }
+
+  const randomQuote = randomQuoteObj.quote;
+  const randomAuthor = randomQuoteObj.author;
+
   container.innerHTML = `
-    <button class="back-button" id="logout"> 
-    <img data-view="check" class="icon-home" src="${logoutIcon}"/>
-    <b>Logout</b>
-    </button>
-    <h1 class="welcome">Welcome to Feely!!</h1>
+  <div class="nav-buttons">
+  <button class="button-home" id="logout"> 
+  <img data-view="check" class="icon-home" src="${logoutIcon}"/>
+  <b>Logout</b>
+  </button>
+  <h1 class="welcome">Welcome to Feely!!</h1>
+  </div>
 
 <section class="home-section">
   <!-- Columna izquierda: lista de preguntas -->
@@ -52,6 +71,18 @@ export function renderHome(container) {
           </button>
         </div>
       </li>
+            <li>
+        <div class="question-container">
+          <div class="text-block">
+            <h3>Create your goals</h3>
+            <p>Achieve happiness that lasts</p>
+          </div>
+          <button class="button-home" data-view="goals">
+            <img data-view="goals" class="icon-home" src="${tickIcon}" />
+            <b data-view="goals">Check your goals</b>
+          </button>
+        </div>
+      </li>
     </ul>
   </div>
 
@@ -67,15 +98,18 @@ export function renderHome(container) {
       <div class="reflexion-container">
       <div class="background" data-bg="./src/backgrounds/reflexion-background.jpg"></div>
       <div class="quote-container">
-      <p class="quote-text">Write down the new goals you have and then check them when completed.</p>
+          <p class="quote-text">"${randomQuote}" <br/>
+            ${randomAuthor}</p>
       </div>
-      <button class="button-home" id="write">
-<img class="icon-home" src="./src/pngicons/light.png" alt="Write" />
-<b>Write your own quote ideas</b>
-</button>
-      <p>Here you can write down</p>
-      <p>the quotes you want see everyday</p>
+      <button class="button-home" data-view="quotes">
+        <img class="icon-home" data-view="quotes" src="./src/pngicons/light.png" />
+        <b data-view="quotes" >Write your own quote ideas</b>
+      </button>
+        <p>Here you can write down</p>
+        <p>the quotes you want see everyday</p>
   </div>
+</section>
+<section class="home-section">
   <div class="right-column">
       <section class="reflexion-container">
       <p>Write down what you would like to read</p>   
@@ -89,9 +123,9 @@ export function renderHome(container) {
 <section class="home-section">
   <div class="left-column">
   <section class="reflexion-container">
-  <button class="button-home" id="write">
-        <img data-view="goals" class="icon-home" src="${tickIcon}" />
-    <b>Create your goals</b>
+  <button data-view="notes" class="button-home"> 
+  <img data-view="notes" class="icon-home" src="${drawIcon}"/>
+  <b data-view="notes" >Create your notes</b>
   </button>
       <div class="quote-container">
         <p class="quote-text">Write down the new goals you have and then check them when completed.</p>
@@ -101,14 +135,13 @@ export function renderHome(container) {
   </div>
   <div class="right-column">
     <div class="reflexion-container">
-        <p>Ideally, you should start with</p>
-      <p>short-term goals.</p>
-      <p>This gives you momentum,</p>
-      <p>clarity, and confidence.</p> 
+        <p>Write down your thoughts, and organize</p>
+      <p>ideas, and emotions </p>
+      <p>to free your mind</p>
+      <p>what really matters.</p> 
     </div>
   </div>
 </section>
-
 
   `
   document.querySelectorAll('.background').forEach(el => {

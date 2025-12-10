@@ -4,10 +4,11 @@ import { renderLogin } from './views/login.js';
 import { renderRegister } from './views/register.js';
 import { renderProfile } from './views/profile.js';
 import { renderCheck } from './views/check.js';
-import { renderSemanalBalance } from './views/semanal_balance.js';
+import { renderWeeklyBalance } from './views/weekly_balance.js';
+import { renderGoals } from './views/goals.js';
+import { renderNotes } from './views/notes.js';
+import { renderQuotes } from './views/quotes.js';
 const app = document.querySelector('#app');
-
-// variable global accesible en navigate
 
 document.addEventListener('DOMContentLoaded', () => {
   const isDayMode = isDayTime();
@@ -56,8 +57,17 @@ export function navigate(view) {
     case 'check':
       renderCheck(app);
       break;
-    case 'semanal_balance':
-      renderSemanalBalance(app);
+    case 'weekly_balance':
+      renderWeeklyBalance(app);
+      break;
+    case 'goals':
+      renderGoals(app);
+      break;
+    case 'notes':
+      renderNotes(app);
+      break;
+    case 'quotes':
+      renderQuotes(app);
       break;
     default:
       renderHome(app);

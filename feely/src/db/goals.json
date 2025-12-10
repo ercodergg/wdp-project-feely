@@ -1,0 +1,14 @@
+{
+  "user123@gmail.com": [
+    {
+      "id": 1,
+      "text": "do the app",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "text": "go to gym 3 days a week",
+      "completed": false
+    }
+  ]
+}
