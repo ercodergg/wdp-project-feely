@@ -95,7 +95,7 @@ export function renderCheck(container) {
         </li>
         <li>
           <h2 class="quote-text text-block" id="name-message"></h2>
-          <h2 class="quote-text text-block" id="checked"></h2>
+          <p class="quote-text text-block" id="checked"></p>
         </li>
         <li>
         <div class="reflexion-container">
@@ -168,8 +168,14 @@ export function renderCheck(container) {
               return dayDate >= startOfWeek && dayDate < endOfWeek;
             });
 
+            const n = currentWeekRecords.length;
             let checkedtext = container.querySelector('#checked');
-            checkedtext.textContent = `You already checked feelings in ${currentWeekRecords} days!`;
+            if(n === 7){
+              checkedtext.textContent = `You checked feelings of all the week, get the weekcheck bellow! `;
+            }
+            else{
+              checkedtext.textContent = `You already checked feelings in ${n} days!`;
+            }
       
             if (currentWeekRecords.length >= 7) {
               setWeeklyButton(true);
