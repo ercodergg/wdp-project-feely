@@ -40,15 +40,15 @@ export function renderCheck(container) {
               <p class="quote-text"> Energy: Can you workout or be focused?</p>
           </div>
           <div class="question-container">
-            <button class="button-home" onclick="setCheck(this.value)" value="tired">
+            <button class="button-home" value="tired">
               <img class="icon-home" src="${tiredIcon}" />
               <b >Tired</b>
             </button>
-            <button class="button-home" onclick="setCheck(this.value)" value="enough" >
+            <button class="button-home"  value="enough" >
               <img  class="icon-home" src="${enoughIcon}" />
               <b >Enough</b>
             </button>
-            <button class="button-home" onclick="setCheck(this.value)" value="energetic">
+            <button class="button-home"  value="energetic">
               <img class="icon-home" src="${energeticIcon}" />
               <b ">Energetic</b>
             </button>
@@ -59,15 +59,15 @@ export function renderCheck(container) {
               <p class="quote-text">Expectations: How do you feel about the future?</p>
           </div>
           <div class="question-container">
-            <button class="button-home" onclick="setCheck(this.value)" value="pesimism">
+            <button class="button-home"  value="pesimism">
               <img  class="icon-home" src="${pesimistIcon}" />
               <b >Pesimism</b>
             </button>
-            <button class="button-home" onclick="setCheck(this.value)" value="nihilism">
+            <button class="button-home" value="nihilism">
               <img  class="icon-home" src="${cloudIcon}" />
               <b >Nihilism</b>
             </button>
-            <button class="button-home" onclick="setCheck(this.value)" value="optimism">
+            <button class="button-home" value="optimism">
               <img  class="icon-home" src="${sunIcon}" />
               <b >Optimism</b>
             </button>
@@ -79,15 +79,15 @@ export function renderCheck(container) {
               <p class="quote-text">Fulfillment: How do you feel about, the things you are currently doing?</p>
           </div>
           <div class="question-container">
-            <button class="button-home" onclick="setCheck(this.value)" value="sad">
+            <button class="button-home" value="sad">
               <img  class="icon-home" src="${sadIcon}" />
               <b >Sad</b>
             </button>
-            <button class="button-home" onclick="setCheck(this.value)" value="neutral">
+            <button class="button-home" value="neutral">
               <img class="icon-home" src="${neutralIcon}" />
               <b >Neutral</b>
             </button>
-            <button class="button-home" onclick="setCheck(this.value)" value="happy">
+            <button class="button-home" value="happy">
               <img class="icon-home" src="${happyIcon}" />
               <b >Happy</b>
             </button>
@@ -95,6 +95,7 @@ export function renderCheck(container) {
         </li>
         <li>
           <h2 class="quote-text text-block" id="name-message"></h2>
+          <h2 class="quote-text text-block" id="checked"></h2>
         </li>
         <li>
         <div class="reflexion-container">
@@ -166,6 +167,9 @@ export function renderCheck(container) {
               const dayDate = new Date(yyyy, (mm || 1) - 1, dd || 1);
               return dayDate >= startOfWeek && dayDate < endOfWeek;
             });
+
+            let checkedtext = container.querySelector('#checked');
+            checkedtext.text = `You already checked feelings in ${currentWeekRecords} days!`;
       
             if (currentWeekRecords.length >= 7) {
               setWeeklyButton(true);
