@@ -195,43 +195,70 @@ export function renderCheck(container) {
 
   console.log(user);
 
-  function getMaxConsecutiveDays(records) {
-    const sorted = records
-      .filter(d => d && d.day)
-      .sort((a, b) => new Date(a.day) - new Date(b.day));
-  
-    let consecutiveCount = 1;
-    let maxConsecutive = 1;
-  
-    for (let i = 1; i < sorted.length; i++) {
-      const prev = new Date(sorted[i - 1].day);
-      const curr = new Date(sorted[i].day);
-      const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
-  
-      if (diffDays === 1) {
-        consecutiveCount++;
-        maxConsecutive = Math.max(maxConsecutive, consecutiveCount);
-      } else {
-        consecutiveCount = 1;
-      }
-    }
-  
-    return maxConsecutive;
-  }
-  function updateConsecutiveButton(records, container) {
-    const maxConsecutive = getMaxConsecutiveDays(records);
-    const checkedtext = container.querySelector('#checked');
-  
-    if (checkedtext) {
-      checkedtext.textContent = `You have ${maxConsecutive}/5 consecutive days.`;
-    }
-  
-    if (maxConsecutive >= 5) {
-      setWeeklyButton(true);
+  // Convierte cualquier fecha a string YYYY-MM-DD en UTC (día puro)
+function toUTCDateString(input) {
+  const d = new Date(input);
+  const y = d.getUTCFullYear();
+  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+// Suma un día a un YYYY-MM-DD en UTC y devuelve YYYY-MM-DD
+function addOneDayUTC(ymd) {
+  const [y, m, d] = ymd.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  const next = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+  const ny = next.getUTCFullYear();
+  const nm = String(next.getUTCMonth() + 1).padStart(2, '0');
+  const nd = String(next.getUTCDate()).padStart(2, '0');
+  return `${ny}-${nm}-${nd}`;
+}
+
+function getMaxConsecutiveDays(records) {
+  // 1) Filtra válidos y normaliza a día UTC
+  const days = records
+    .filter(r => r && r.day)
+    .map(r => toUTCDateString(r.day));
+
+  if (days.length === 0) return 0;
+
+  // 2) Deduplica por día
+  const uniqueDays = Array.from(new Set(days));
+
+  // 3) Ordena ascendente
+  uniqueDays.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+
+  // 4) Calcula rachas comparando día siguiente exacto (sin floats)
+  let maxConsecutive = 1;
+  let current = 1;
+
+  for (let i = 1; i < uniqueDays.length; i++) {
+    const prevDay = uniqueDays[i - 1];
+    const currDay = uniqueDays[i];
+    const prevPlusOne = addOneDayUTC(prevDay);
+
+    if (currDay === prevPlusOne) {
+      current++;
+      if (current > maxConsecutive) maxConsecutive = current;
     } else {
-      setWeeklyButton(false);
+      current = 1;
     }
   }
+
+  return maxConsecutive;
+}
+
+function updateConsecutiveButton(records, container) {
+  const maxConsecutive = getMaxConsecutiveDays(records);
+
+  const checkedtext = container.querySelector('#checked');
+  if (checkedtext) {
+    checkedtext.textContent = `You have ${maxConsecutive}/5 consecutive days.`;
+  }
+
+  setWeeklyButton(maxConsecutive >= 5);
+}
 
   const states = {
     energy: ["tired", "enough", "energetic"],
