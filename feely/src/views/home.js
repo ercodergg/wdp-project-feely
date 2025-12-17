@@ -94,14 +94,7 @@ export async function renderHome(container) {
 
   <!-- Columna derecha: reflexión -->
   <div class="right-column">
-    <section class="reflexion-container">
-      <div class="background" data-bg="${relaxBackground}"></div>
-    </section>
-  </div>
-</section>
-<section class="home-section">
-  <div class="left-column">
-      <div class="reflexion-container">
+        <div class="reflexion-container">
       <div class="background" data-bg="${reflexionBackground}"></div>
       <div class="quote-container">
           <p class="quote-text">"${randomQuote}" <br/>
@@ -116,7 +109,12 @@ export async function renderHome(container) {
   </div>
 </section>
 <section class="home-section">
-  <div class="right-column">
+  <div class="left-column">
+      <section class="reflexion-container">
+      <div class="background" data-bg="${relaxBackground}"></div>
+    </section>
+  </div>
+    <div class="right-column">
       <section class="reflexion-container">
       <p>Write down what you would like to read</p>   
       <p> when you wake up, </p>
