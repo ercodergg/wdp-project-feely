@@ -763,7 +763,7 @@
   /* Lista limpia y coherente */
   ul.question-list {
     width: 100%;
-    max-height: 18em;
+    height:auto;
 
     list-style: none;
     padding: 0;
