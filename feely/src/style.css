@@ -345,7 +345,6 @@
 
  .reflexion-container p {
    font-size: var(--font-size-quote);
-   font-weight: 200;
    color: var(--color-white);
    text-shadow: var(--shadow-text-strong);
    transition: var(--transition-opacity-slow);
@@ -538,7 +537,7 @@
  h3 {
    padding: 0;
    margin: 0;
-   font-family: var(--font-family-main);
+   font-weight: 800;
    color: var(--color-white);
  }
 
@@ -1035,6 +1034,7 @@
      flex-direction: row;
      max-width: none;
      align-items: center;
+     font-weight: 800;
      border-radius: var(--radius-l);
      text-align: center;
    }
