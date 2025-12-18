@@ -40,15 +40,15 @@ export function renderCheck(container) {
               <p class="quote-text"> Energy: Can you workout or be focused?</p>
           </div>
           <div class="question-container">
-            <button class="button-home" value="tired">
+            <button class="button-home" data-group="energy" value="tired">
               <img class="icon-home" src="${tiredIcon}" />
               <b >Tired</b>
             </button>
-            <button class="button-home"  value="enough" >
+            <button class="button-home" data-group="energy" value="enough" >
               <img  class="icon-home" src="${enoughIcon}" />
               <b >Enough</b>
             </button>
-            <button class="button-home"  value="energetic">
+            <button class="button-home" data-group="energy" value="energetic">
               <img class="icon-home" src="${energeticIcon}" />
               <b ">Energetic</b>
             </button>
@@ -59,15 +59,15 @@ export function renderCheck(container) {
               <p class="quote-text">Expectations: How do you feel about the future?</p>
           </div>
           <div class="question-container">
-            <button class="button-home"  value="pesimism">
+            <button class="button-home" data-group="expectations" value="pesimism">
               <img  class="icon-home" src="${pesimistIcon}" />
               <b >Pesimism</b>
             </button>
-            <button class="button-home" value="nihilism">
+            <button class="button-home" data-group="expectations" value="nihilism">
               <img  class="icon-home" src="${cloudIcon}" />
               <b >Nihilism</b>
             </button>
-            <button class="button-home" value="optimism">
+            <button class="button-home" data-group="expectations" value="optimism">
               <img  class="icon-home" src="${sunIcon}" />
               <b >Optimism</b>
             </button>
@@ -79,15 +79,15 @@ export function renderCheck(container) {
               <p class="quote-text">Fulfillment: How do you feel about, the things you are currently doing?</p>
           </div>
           <div class="question-container">
-            <button class="button-home" value="sad">
+            <button class="button-home" data-group="fulfillment" value="sad">
               <img  class="icon-home" src="${sadIcon}" />
               <b >Sad</b>
             </button>
-            <button class="button-home" value="neutral">
+            <button class="button-home" data-group="fulfillment" value="neutral">
               <img class="icon-home" src="${neutralIcon}" />
               <b >Neutral</b>
             </button>
-            <button class="button-home" value="happy">
+            <button class="button-home" data-group="fulfillment" value="happy">
               <img class="icon-home" src="${happyIcon}" />
               <b >Happy</b>
             </button>
