@@ -440,7 +440,9 @@
  }
 
  .button-home:active {
-   outline: none;
+  background-color: var(--color-light-bg);
+  box-shadow: var(--shadow-button-hover);
+  border:none;
  }
 
  /* Quitar estilo nativo del checkbox */
@@ -1030,11 +1032,10 @@
    .quote-container {
      width: 100%;
      display: flex;
-    font-weight: 800;
      flex-direction: row;
      max-width: none;
      align-items: center;
-     font-weight: 800;
+     font-family: var(--font-family-main);
      border-radius: var(--radius-l);
      text-align: center;
    }

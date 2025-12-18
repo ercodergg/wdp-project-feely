@@ -113,6 +113,21 @@ export function renderCheck(container) {
         </ul>
 
       `;
+      container.querySelectorAll(".question-container button").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const group = btn.getAttribute("data-group"); // energy, expectations, fulfillment
+      
+          // desactivar todos los botones del mismo grupo
+          container.querySelectorAll(`button[data-group="${group}"]`)
+            .forEach(b => b.classList.remove("active"));
+      
+          // activar el botón clicado
+          btn.classList.add("active");
+      
+          // actualizar el objeto check
+          setCheck(btn.value);
+        });
+      });
       document.querySelectorAll('.background').forEach(el => {
         const bg = el.getAttribute('data-bg');
         if (bg) {
