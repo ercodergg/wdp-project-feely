@@ -439,11 +439,12 @@
    box-shadow: var(--shadow-button-hover);
  }
 
- .button-home:active {
+ .button-home.active {
   background-color: var(--color-light-bg);
   box-shadow: var(--shadow-button-hover);
-  border:none;
- }
+  border: none;
+}
+
 
  /* Quitar estilo nativo del checkbox */
  input[type="checkbox"] {
