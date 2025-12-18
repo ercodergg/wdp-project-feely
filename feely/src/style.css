@@ -1,6 +1,8 @@
  :root {
    /* 🎨 Colores */
-   font-family: "Dela Gothic One", system-ui, Avenir, Helvetica, Arial, sans-serif;
+   font-family: "Montserrat", system-ui, Avenir, Helvetica, Arial, sans-serif;
+   --font-family-main: "Dela Gothic One", Arial, sans-serif;
+   ;
    --color-white: #FEFEFE;
    --color-black: #000000;
    --color-text: rgba(255, 255, 255, 0.87);
@@ -126,9 +128,10 @@
  img {
    transition: var(--transition-opacity-slow);
  }
-
+ p {
+  font-weight: 300;
+ }
  textarea {
-   font-family: var(--font-family-main);
    background: none;
    border: 2px solid var(--color-white);
    width: 90%;
@@ -296,11 +299,13 @@
  }
 
  .back-button b {
+   font-family: var(--font-family-main);
    font-size: var(--font-size-button-items);
  }
 
 
  .right-column button {
+   font-family: var(--font-family-main);
    max-width: var(--button-max-width-md);
  }
 
@@ -402,6 +407,7 @@
  /* Buttons */
  .button-home,
  .button-home-unabled {
+   font-family: var(--font-family-main);
    font-size: var(--font-size-button-items);
    display: flex;
    flex-direction: row;
@@ -419,10 +425,12 @@
  }
 
  .button-home {
+   font-family: var(--font-family-main);
    background-color: var(--color-mid-dark-bg);
  }
 
  .button-home-unabled {
+   font-family: var(--font-family-main);
    background-color: var(--color-unabled);
    border: none;
  }
@@ -443,7 +451,7 @@
    -webkit-appearance: none;
    -moz-appearance: none;
 
-   /* aplicar estilo de button-home */
+   font-family: var(--font-family-main);
    font-size: var(--font-size-button-items);
    display: flex;
    flex-direction: row;
@@ -502,7 +510,7 @@
  }
 
  .text-block {
-   text-align: right;
+   text-align: center;
    color: var(--color-white);
  }
 
@@ -565,7 +573,6 @@
 
  input {
    border: none;
-   font-family: var(--font-family-main);
    border-radius: var(--radius-xxl);
    height: var(--form-input-height);
    width: 50%;
@@ -589,7 +596,6 @@
    background-color: var(--color-light-bg);
    border: none;
    color: var(--color-dark-bg);
-   font-family: var(--font-family-main);
    padding-left: 0.625em;
    /* 10px */
    border-radius: var(--radius-xxl);
@@ -607,6 +613,7 @@
  }
 
  form button {
+   font-family: var(--font-family-main);
    background-color: var(--color-white);
    color: var(--color-black);
    border-radius: var(--radius-xxl);
@@ -663,6 +670,7 @@
  }
 
  .error-popup button {
+   font-family: var(--font-family-main);
    background-color: var(--error-btn-bg);
    color: var(--error-btn-txt);
  }
@@ -685,6 +693,7 @@
 
  /* Navigation buttons */
  .nav-buttons {
+   font-family: var(--font-family-main);
    display: flex;
    align-items: center;
    justify-content: flex;
@@ -751,6 +760,7 @@
  /* Headings */
  h1 {
    font-size: var(--font-size-h1);
+   font-family: var(--font-family-main);
    color: var(--color-center-bg);
    line-height: 0.9;
    font-weight: 500;
@@ -848,6 +858,7 @@
  }
 
  ul button {
+   font-family: var(--font-family-main);
    max-width: var(--button-max-width-lg);
  }
 
@@ -931,6 +942,7 @@
 
    /* 768px */
    h1 {
+     font-family: var(--font-family-main);
      font-size: var(--font-size-mobile-h1);
      color: var(--color-center-bg);
      line-height: 1.1;
@@ -938,6 +950,7 @@
    }
 
    .button-home b {
+     font-family: var(--font-family-main);
      font-size: var(--font-size-button-items);
    }
 
@@ -1007,6 +1020,7 @@
    }
 
    .button-home {
+     font-family: var(--font-family-main);
      border-radius: var(--radius-l);
      padding: 0.5em;
    }
@@ -1030,6 +1044,7 @@
    }
 
    .nav-buttons button {
+     font-family: var(--font-family-main);
      font-size: var(--font-size-button-items);
      /* 12px */
    }

@@ -114,37 +114,35 @@ export async function renderHome(container) {
       <div class="background" data-bg="${relaxBackground}"></div>
     </section>
   </div>
-    <div class="right-column">
+  <div class="right-column">
       <section class="reflexion-container">
       <p>Write down what you would like to read</p>   
       <p> when you wake up, </p>
       <p>when you are lost, </p>
       <p>what connects you with yourself.</p>
-       </div>
-    </section>
+      </section>
   </div>
 </section>
 <section class="home-section">
   <div class="left-column">
-  <section class="reflexion-container">
-  <button data-view="notes" class="button-home"> 
-  <img data-view="notes" class="icon-home" src="${drawIcon}"/>
-  <b data-view="notes" >Create your notes</b>
-  </button>
-      <div class="quote-container">
-        <p class="quote-text">Write down the new goals you have and then check them when completed.</p>
-      </div>
-      <div class="background" data-bg="${noteBackground}"></div>
-      
-    </section>
-  </div>
-  <div class="right-column">
-    <div class="reflexion-container">
+      <div class="reflexion-container">
         <p>Write down your thoughts, and organize</p>
       <p>ideas, and emotions </p>
       <p>to free your mind</p>
       <p>what really matters.</p> 
     </div>
+  </div>
+  <div class="right-column">
+      <section class="reflexion-container">
+    <button data-view="notes" class="button-home"> 
+        <img data-view="notes" class="icon-home" src="${drawIcon}"/>
+        <b data-view="notes" >Create your notes</b>
+    </button>
+        <div class="quote-container">
+          <p class="quote-text">Write down the new goals you have and then check them when completed.</p>
+        </div>
+        <div class="background" data-bg="${noteBackground}"></div>
+    </section>
   </div>
 </section>
 
