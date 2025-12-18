@@ -129,7 +129,7 @@
    transition: var(--transition-opacity-slow);
  }
  p {
-  font-weight: 300;
+  font-weight: 500;
  }
  textarea {
    background: none;
@@ -526,19 +526,19 @@
  .text-block p {
    text-shadow: var(--shadow-text-strong);
 
-   font-weight: 100;
+   font-weight: 700;
  }
 
  .text-block h3,
  .text-block p {
    text-shadow: var(--shadow-text-strong);
-   font-weight: 100;
  }
 
 
  h3 {
    padding: 0;
    margin: 0;
+   font-family: var(--font-family-main);
    color: var(--color-white);
  }
 
@@ -971,7 +971,6 @@
 
    .quote-container .quote-text {
      font-size: var(--font-size-mobile-quote);
-
      color: var(--color-white);
      text-shadow: var(--shadow-text-strong);
    }
@@ -1032,6 +1031,7 @@
    .quote-container {
      width: 100%;
      display: flex;
+    font-weight: 800;
      flex-direction: row;
      max-width: none;
      align-items: center;
